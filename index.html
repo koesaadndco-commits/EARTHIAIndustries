@@ -1566,11 +1566,41 @@
     vid.load();
   }
 
+  function rewind(vid) {
+    try { if (vid.currentTime > 0.05) vid.currentTime = 0; } catch (e) {}
+  }
+
+  // Once metadata is in, the playhead can be moved for real. If it still is
+  // not at the start, the element has come back in a state a seek cannot fix
+  // and only a fresh load will clear it. One attempt per scene: if even that
+  // does not take, the minimum dwell below keeps the scene on screen.
+  function settle(vid) {
+    rewind(vid);
+    if (vid.currentTime > 0.5 && !vid.dataset.reloaded) {
+      vid.dataset.reloaded = '1';
+      try { vid.load(); } catch (e) {}
+      const p = vid.play();
+      if (p) p.catch(()=>{});
+    }
+  }
+
   function startClip(vid) {
     if (!vid) return;
     vid.preload = 'auto';
     vid.dataset.warmed = '1';
-    try { vid.currentTime = 0; } catch (e) {}
+    delete vid.dataset.reloaded;
+    rewind(vid);
+    // A seek asked for before the element holds any metadata is dropped on the
+    // floor. Phones evict buffered clips under memory pressure and hand them
+    // back parked wherever the playhead stopped last lap, so on the second
+    // time round the film a clip can resume a moment from its own end. Deal
+    // with it the instant a seek can actually land.
+    if (vid.readyState < 1) {
+      const again = () => { vid.removeEventListener('loadedmetadata', again); settle(vid); };
+      vid.addEventListener('loadedmetadata', again);
+    } else {
+      settle(vid);
+    }
     vid.muted = !soundOn;
     const p = vid.play();
     if (p) p.catch(()=>{});
@@ -1597,15 +1627,26 @@
     setTimeout(go, 4000);
   })();
 
-  // Force autoplay on first interaction (mobile requirement)
-  document.addEventListener('touchstart', function initVideos() {
-    manageMedia(current);
-    document.removeEventListener('touchstart', initVideos);
-  }, {once:true});
-  document.addEventListener('click', function initVideos() {
-    manageMedia(current);
-    document.removeEventListener('click', initVideos);
-  }, {once:true});
+  // The opening scene's clock starts when its picture does, not when the page
+  // was parsed — otherwise it is charged for however long the clip took to
+  // arrive and gets a short turn on a slow line.
+  (function () {
+    const first = slides[0].querySelector('video');
+    if (!first) return;
+    const mark = () => { first.removeEventListener('playing', mark); sceneAt = Date.now(); };
+    first.addEventListener('playing', mark);
+  })();
+
+  // A phone that refused to autoplay gets one more go on the first gesture.
+  // Only a clip that is actually stopped is started: the first touch on a
+  // phone is nearly always the start of a scroll, and restarting a scene that
+  // is already running would snap it back to its opening frame.
+  function kickPlayback() {
+    const vid = slides[current].querySelector('video');
+    if (vid && vid.paused) startClip(vid);
+  }
+  document.addEventListener('touchstart', kickPlayback, {once:true});
+  document.addEventListener('click', kickPlayback, {once:true});
 
   // Progress bar
   function updateBar() {
@@ -1644,10 +1685,30 @@
   // Must match the opacity transition on .hero__slide.
   const CROSSFADE = 1400;
 
+  // Every scene holds the screen for at least this long. A clip that comes
+  // back from the browser with a stale playhead, or reports a duration it has
+  // not really got, otherwise runs the run-out check on its very first tick
+  // and the scene is gone in a blink — which is what a phone does and a
+  // desktop, holding all eight clips in memory, does not. A handover asked
+  // for too early is held back to the floor rather than thrown away, so a
+  // genuinely short clip still gets its full turn.
+  const MIN_DWELL = 3000;
+  let sceneAt = Date.now();
+  let pending = 0;
+
   function transition() {
     // 'ended', the stall watchdog and the run-out check can all land together
     if (handingOver) return;
+    const held = Date.now() - sceneAt;
+    if (held < MIN_DWELL) {
+      if (!pending) {
+        pending = setTimeout(() => { pending = 0; transition(); }, MIN_DWELL - held);
+      }
+      return;
+    }
     handingOver = true;
+    clearTimeout(pending);
+    pending = 0;
     clearTimeout(watchdog);
 
     const prev = current;
@@ -1663,6 +1724,7 @@
     // current moves now so the outgoing clip's own 'ended' cannot start a
     // second handover behind this one.
     current = nextIdx;
+    sceneAt = Date.now();
     updateBar();
 
     // The copy leaves faster than the picture, so it is gone before the scene
