@@ -516,7 +516,7 @@
 
   /* ─── SERVICE / COMPANY / CONTACT ─── */
   /* The nav is fixed, so an anchor jump would otherwise tuck the heading under it */
-  #about, #works, #service, #company, #contact{scroll-margin-top:5.5rem}
+  #about, #record, #works, #service, #company, #contact{scroll-margin-top:5.5rem}
 
   .panel{
     background:var(--deep);
@@ -967,11 +967,221 @@
     margin-top:1.6rem;
   }
 
+  /* ─── 契約実績のグラフ ─── */
+  .record__headline{
+    text-align:center;
+    margin-bottom:2.6rem;
+  }
+  .record__count{
+    font-family:var(--font-display);
+    font-size:clamp(3.4rem, 13vw, 6rem);
+    font-weight:700;
+    line-height:1;
+    color:var(--glow);
+    letter-spacing:0.02em;
+    font-variant-numeric:tabular-nums;
+  }
+  .record__count span{
+    font-family:var(--font-body);
+    font-size:0.3em;
+    font-weight:900;
+    letter-spacing:0.08em;
+    margin-left:0.15em;
+  }
+  .record__claim{
+    font-size:clamp(0.95rem, 2.6vw, 1.15rem);
+    font-weight:700;
+    color:var(--pale);
+    line-height:1.9;
+    margin-top:0.9rem;
+  }
+  .record__note{
+    font-size:0.74rem;
+    color:var(--ice);
+    line-height:1.8;
+    margin-top:0.8rem;
+  }
+
+  .chart{
+    max-width:640px;
+    margin:0 auto;
+    padding:1.6rem 1.2rem 1rem;
+    border:1px solid rgba(74,124,201,0.28);
+    border-radius:14px;
+    background:rgba(255,255,255,0.04);
+  }
+  .chart__title{
+    font-family:var(--font-display);
+    font-size:0.66rem;
+    font-weight:600;
+    letter-spacing:0.28em;
+    color:var(--glow);
+    text-align:center;
+    margin-bottom:1.2rem;
+  }
+  .chart svg{display:block;width:100%;height:auto;overflow:visible}
+
+  .visually-hidden{
+    position:absolute;
+    width:1px;height:1px;
+    margin:-1px;padding:0;border:0;
+    clip-path:inset(50%);
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  /* The table is the figures' only home. Without the script it is what the
+     visitor reads; with it, the chart is drawn from these very numbers and the
+     table steps aside. */
+  .chart__data{
+    width:100%;
+    max-width:340px;
+    margin:0 auto;
+    border-collapse:collapse;
+    font-size:0.86rem;
+  }
+  .chart__data th,
+  .chart__data td{
+    padding:0.6rem 0.4rem;
+    border-bottom:1px solid rgba(74,124,201,0.25);
+    color:var(--pale);
+    font-weight:700;
+  }
+  .chart__data thead th{
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    color:var(--glow);
+  }
+  .chart__data td{text-align:right;font-variant-numeric:tabular-nums}
+  .chart__grid{stroke:currentColor;stroke-width:1;opacity:0.16}
+  .chart__bar{fill:var(--glow);opacity:0.85;
+    /* Bars grow from the baseline. The transform origin is set per-bar in the
+       markup because SVG cannot resolve a percentage origin on a <rect>. */
+    transform:scaleY(0);
+    transition:transform 1.1s cubic-bezier(.22,.85,.3,1);
+  }
+  .chart.is-live .chart__bar{transform:scaleY(1)}
+  .chart__line{
+    fill:none;
+    stroke:#f0a23c;
+    stroke-width:2.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    transition:stroke-dashoffset 1.5s ease 0.35s;
+  }
+  .chart__dot{fill:#f0a23c;opacity:0;transition:opacity 0.4s ease 1.5s}
+  .chart.is-live .chart__dot{opacity:1}
+  .chart__val{
+    font-family:var(--font-display);
+    font-size:12px;
+    font-weight:700;
+    fill:var(--pale);
+    text-anchor:middle;
+    opacity:0;
+    transition:opacity 0.5s ease 1.2s;
+  }
+  .chart.is-live .chart__val{opacity:1}
+  .chart__barval{
+    font-family:var(--font-display);
+    font-size:13px;
+    font-weight:700;
+    fill:#fff;
+    text-anchor:middle;
+    opacity:0;
+    transition:opacity 0.5s ease 1.2s;
+  }
+  .chart.is-live .chart__barval{opacity:1}
+  .chart__xlabel{
+    font-family:var(--font-body);
+    font-size:11px;
+    font-weight:700;
+    fill:var(--ice);
+    text-anchor:middle;
+  }
+  .chart__legend{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:0.4rem 1.4rem;
+    margin-top:1rem;
+    font-size:0.72rem;
+    font-weight:700;
+    color:var(--ice);
+  }
+  .chart__legend i{
+    display:inline-block;
+    width:0.8rem;
+    height:0.5rem;
+    border-radius:2px;
+    margin-right:0.4rem;
+    vertical-align:0.02rem;
+  }
+  .chart__legend .k-bar{background:var(--glow)}
+  .chart__legend .k-line{background:#f0a23c}
+
+  /* ─── 「高い」と感じたら、の一言 ─── */
+  .pricecall{
+    max-width:760px;
+    margin:0 auto;
+    text-align:center;
+    padding:2.6rem 1.6rem;
+    border:1px solid rgba(74,124,201,0.35);
+    border-radius:16px;
+    background:rgba(74,124,201,0.08);
+  }
+  .pricecall__eyebrow{
+    font-family:var(--font-display);
+    font-size:0.66rem;
+    font-weight:600;
+    letter-spacing:0.28em;
+    color:var(--glow);
+    margin-bottom:1rem;
+  }
+  .pricecall__lead{
+    font-size:clamp(1.15rem, 3.6vw, 1.7rem);
+    font-weight:900;
+    line-height:1.75;
+    color:var(--pale);
+    letter-spacing:0.02em;
+  }
+  .pricecall__sub{
+    font-size:0.88rem;
+    line-height:2;
+    color:var(--white);
+    margin-top:1.1rem;
+  }
+  .pricecall__actions{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:0.7rem;
+    margin-top:1.7rem;
+  }
+  .btn-solid,
+  .btn-ghost{
+    font-family:var(--font-body);
+    font-size:0.86rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-decoration:none;
+    padding:0.8rem 1.7rem;
+    border-radius:999px;
+    border:1px solid var(--glow);
+    transition:background 0.25s, color 0.25s, border-color 0.25s;
+  }
+  .btn-solid{background:var(--glow); color:#fff}
+  .btn-solid:hover,
+  .btn-solid:focus-visible{background:#173d78; border-color:#173d78}
+  .btn-ghost{background:transparent; color:var(--pale)}
+  .btn-ghost:hover,
+  .btn-ghost:focus-visible{background:var(--glow); color:#fff}
+
   @media(max-width:600px){
     .panel{padding:4rem 1.5rem}
     .company-table th,
     .company-table td{display:block;width:auto;padding:0.6rem 0}
     .company-table th{border-bottom:none;padding-bottom:0.2rem}
+    .chart{padding:1.2rem 0.6rem 0.8rem}
+    .pricecall{padding:2rem 1.1rem}
   }
 
   /* ═══ DAYLIGHT — everything below the hero ═══
@@ -1060,6 +1270,14 @@
   .daylight .ba-handle,
   .daylight .ba-handle__line{background:#fff}
 
+  /* The chart and the price note were drawn to sit on near-black; on the white
+     panel the faint fills vanish and the grid lines pick up the wrong colour. */
+  .daylight .chart{background:rgba(255,255,255,0.72); border-color:rgba(47,102,189,0.28)}
+  .daylight .chart__grid{stroke:#13223e; opacity:0.14}
+  .daylight .chart__bar{opacity:1}
+  .daylight .pricecall{background:rgba(31,78,150,0.07); border-color:rgba(31,78,150,0.3)}
+  .daylight .btn-ghost{background:rgba(255,255,255,0.85)}
+
 
   @media(max-width:768px){
     /* The menu used to be hidden here, which left phone visitors with no way
@@ -1119,8 +1337,9 @@
   <ul class="nav__menu">
     <li><a href="#about">About</a></li>
     <li><a href="#service">事業内容</a></li>
-    <li><a href="#works">実績</a></li>
+    <li><a href="#record">実績</a></li>
     <li><a href="#company">会社概要</a></li>
+    <li><a href="recruit.html">採用情報</a></li>
     <li><a href="#contact">お問い合わせ</a></li>
   </ul>
 </nav>
@@ -1213,6 +1432,43 @@
   <h2 class="intro__heading"><span class="clause">飲食店の厨房から、</span><span class="clause">施設の隅々まで。</span><span class="clause">現場を知り尽くした</span><span class="clause">チームが、</span><span class="clause">ムダのない段取りで、</span><span class="clause">確実に仕上げます。</span></h2>
   <div class="intro__divider"></div>
   <p class="intro__tagline">綺麗な未来を創る！</p>
+</section>
+
+<!-- ─── 契約実績 ───
+     The figures live in the table below and nowhere else. It is the readable
+     fallback when the script does not run, and the script draws the chart from
+     it, so adding a month means adding one row and nothing else. -->
+<section class="panel" id="record">
+  <div class="panel__inner">
+    <p class="panel__eyebrow">TRACK RECORD</p>
+    <h2 class="panel__heading">ご契約いただいた企業様</h2>
+
+    <div class="record__headline">
+      <p class="record__count" id="recordCount">50<span>社以上</span></p>
+      <p class="record__claim">
+        <span class="clause">2ヶ月で、</span><span class="clause">県内外の企業様</span><span class="clause">50社以上と</span><span class="clause">ご契約いただきました。</span>
+      </p>
+      <p class="record__note">※ 自社集計。福井県内および県外のお取引先を含みます。</p>
+    </div>
+
+    <div class="chart" id="chart">
+      <p class="chart__title">MONTHLY CONTRACTS</p>
+      <table class="chart__data" id="chartData">
+        <caption class="visually-hidden">月別の新規ご契約社数</caption>
+        <thead>
+          <tr><th scope="col">月</th><th scope="col">新規ご契約</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">1ヶ月目</th><td>22</td></tr>
+          <tr><th scope="row">2ヶ月目</th><td>28</td></tr>
+        </tbody>
+      </table>
+      <div class="chart__legend" aria-hidden="true">
+        <span><i class="k-bar"></i>月間の新規ご契約</span>
+        <span><i class="k-line"></i>累計</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ─── BEFORE / AFTER ─── -->
@@ -1423,6 +1679,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+<!-- ─── 料金のご相談 ─── -->
+<section class="panel" id="estimate">
+  <div class="pricecall">
+    <p class="pricecall__eyebrow">FAIR PRICE</p>
+    <p class="pricecall__lead">
+      <span class="clause">他社様で</span><span class="clause">高いと感じた場合、</span><span class="clause">一度ご相談ください。</span>
+    </p>
+    <p class="pricecall__sub">
+      <span class="clause">お見積りは無料です。</span><span class="clause">いまお持ちのお見積書を</span><span class="clause">お見せいただければ、</span><span class="clause">同じ品質でどこまで抑えられるか、</span><span class="clause">その場でお答えします。</span>
+    </p>
+    <div class="pricecall__actions">
+      <a class="btn-solid" href="https://lin.ee/9ytFn1m" target="_blank" rel="noopener">LINEで見積り相談</a>
+      <a class="btn-ghost" href="tel:09032900005">090-3290-0005</a>
+    </div>
   </div>
 </section>
 
@@ -1822,6 +2095,123 @@
     window.addEventListener('touchmove', e => { if (dragging) move(e.touches[0].clientX); }, {passive:true});
     window.addEventListener('touchend', () => { dragging = false; });
   });
+
+  // ─── 契約実績のグラフ ───
+  // Drawn from the table already in the markup, which stays the one and only
+  // place the figures live: adding a month is adding a row. If this never runs
+  // the table is still on the page and still reads correctly.
+  (function () {
+    const box   = document.getElementById('chart');
+    const table = document.getElementById('chartData');
+    const count = document.getElementById('recordCount');
+    if (!box || !table) return;
+
+    const rows = [...table.querySelectorAll('tbody tr')].map(tr => ({
+      label: tr.querySelector('th').textContent.trim(),
+      n: parseInt((tr.querySelector('td').textContent || '').replace(/[^0-9]/g, ''), 10) || 0,
+    })).filter(r => r.label);
+    if (!rows.length) return;
+
+    let running = 0;
+    rows.forEach(r => { r.cum = (running += r.n); });
+    const total = rows[rows.length - 1].cum;
+    const peak  = Math.max(total, 1);
+
+    // The headline is the table's total, so the two can never drift apart.
+    if (count) count.firstChild.nodeValue = String(total);
+
+    const W = 600, H = 250, PAD_L = 16, PAD_R = 16, PAD_T = 34, PAD_B = 34;
+    const iw = W - PAD_L - PAD_R, ih = H - PAD_T - PAD_B;
+    const band = iw / rows.length;
+    const bw = Math.min(band * 0.4, 58);
+    const base = PAD_T + ih;
+    const y = v => PAD_T + ih - (v / peak) * ih;
+
+    const NS = 'http://www.w3.org/2000/svg';
+    const el = (n, a) => {
+      const e = document.createElementNS(NS, n);
+      for (const k in a) e.setAttribute(k, a[k]);
+      return e;
+    };
+
+    const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img' });
+    svg.setAttribute('aria-label', `月別の新規ご契約社数。累計${total}社。`);
+
+    for (let i = 0; i <= 4; i++) {
+      const gy = PAD_T + ih * (i / 4);
+      svg.appendChild(el('line', { x1: PAD_L, y1: gy, x2: W - PAD_R, y2: gy, class: 'chart__grid' }));
+    }
+
+    const pts = [];
+    rows.forEach((r, i) => {
+      const cx = PAD_L + band * i + band / 2;
+      const top = y(r.n);
+      const bar = el('rect', {
+        x: cx - bw / 2, y: top, width: bw,
+        height: Math.max(base - top, 1), rx: 4, class: 'chart__bar',
+      });
+      // SVG will not resolve a percentage transform-origin on a <rect>, so the
+      // baseline is pinned in user units and the bar grows up out of it.
+      bar.style.transformOrigin = `${cx}px ${base}px`;
+      bar.style.transitionDelay = (i * 0.12) + 's';
+      svg.appendChild(bar);
+
+      const xl = el('text', { x: cx, y: base + 21, class: 'chart__xlabel' });
+      xl.textContent = r.label;
+      svg.appendChild(xl);
+
+      // The month's own figure, inside its bar. Without it the only numbers on
+      // the chart are the running totals, and a month like the second one --
+      // whose bar is the tallest but whose label is a cumulative 50 -- reads
+      // as if it brought in far more than it did.
+      const bv = el('text', { x: cx, y: top + 22, class: 'chart__barval' });
+      bv.textContent = '+' + r.n;
+      svg.appendChild(bv);
+
+      pts.push([cx, y(r.cum)]);
+    });
+
+    const path = el('path', {
+      d: pts.map((p, i) => (i ? 'L' : 'M') + p[0] + ' ' + p[1]).join(' '),
+      class: 'chart__line',
+    });
+    svg.appendChild(path);
+
+    pts.forEach((p, i) => {
+      svg.appendChild(el('circle', { cx: p[0], cy: p[1], r: 4.5, class: 'chart__dot' }));
+      const t = el('text', { x: p[0], y: p[1] - 12, class: 'chart__val' });
+      t.textContent = rows[i].cum + '社';
+      svg.appendChild(t);
+    });
+
+    table.classList.add('visually-hidden');
+    box.insertBefore(svg, table);
+
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function reveal() {
+      box.classList.add('is-live');
+      path.style.strokeDashoffset = 0;
+      if (!count) return;
+      if (still) { count.firstChild.nodeValue = String(total); return; }
+      const t0 = performance.now(), ms = 1200;
+      (function tick(now) {
+        const k = Math.min((now - t0) / ms, 1);
+        count.firstChild.nodeValue = String(Math.round(total * (1 - Math.pow(1 - k, 3))));
+        if (k < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+
+    if (still || !('IntersectionObserver' in window)) { reveal(); return; }
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { io.disconnect(); reveal(); } });
+    }, { threshold: 0.3 });
+    io.observe(box);
+  })();
 </script>
 
 </body>

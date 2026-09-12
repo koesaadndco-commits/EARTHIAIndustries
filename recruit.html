@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>採用情報 | 株式会社EARTHIA工業</title>
+<meta name="description" content="株式会社EARTHIA工業（福井市）の採用情報。清掃部門 Re:Life Works と工業部門で、一緒に働く仲間を募集しています。">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+  /* This page has no dark film at the top, so it is the daylight palette all
+     the way down rather than a flip partway. The names match index.html so the
+     shared components below can be lifted across unchanged. */
+  :root{
+    --deep:  #eef3fb;
+    --navy:  #ffffff;
+    --slate: #ffffff;
+    --ice:   #40567b;
+    --pale:  #13223e;
+    --white: #22304c;
+    --glow:  #1f4e96;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body:    'Noto Sans JP', 'Space Grotesk', sans-serif;
+  }
+
+  html,body{
+    background:var(--deep);
+    color:var(--white);
+    font-family:var(--font-body);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* Japanese wraps at any character, so a narrow screen cuts straight through
+     a word. Each clause is an inline-block, leaving the browser nowhere to
+     break but between clauses. */
+  .clause{display:inline-block}
+
+  .visually-hidden{
+    position:absolute;
+    width:1px;height:1px;
+    margin:-1px;padding:0;border:0;
+    clip-path:inset(50%);
+    overflow:hidden;
+    white-space:nowrap;
+  }
+
+  .sky{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(238,243,251,0.34) 0%, rgba(238,243,251,0.6) 70%, rgba(238,243,251,0.8) 100%),
+      url('https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_070641_07ec4048-cbd0-4505-b6bf-7081b227866d.png') center 20%/cover no-repeat,
+      linear-gradient(180deg, #8fbfec 0%, #bcdcf6 48%, #e8f1fb 100%);
+  }
+  main,footer{position:relative;z-index:1}
+
+  /* ─── Navigation (same bar as the front page) ─── */
+  .nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1.5rem;
+    padding:1.3rem 2.5rem;
+    background:linear-gradient(180deg, rgba(216,235,251,0.97) 0%, rgba(197,224,246,0.92) 100%);
+    border-bottom:1px solid rgba(31,78,150,0.18);
+  }
+  .nav__brand{
+    display:flex;
+    align-items:center;
+    gap:0.7rem;
+    font-family:var(--font-display);
+    font-size:1.45rem;
+    font-weight:700;
+    letter-spacing:0.16em;
+    color:#13223e;
+    text-transform:uppercase;
+    text-decoration:none;
+    line-height:1.15;
+  }
+  .nav__mark{width:auto;height:2.5rem;flex:none}
+  .nav__brand-text{display:block}
+  .nav__brand-text span{
+    display:block;
+    font-family:var(--font-body);
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.18em;
+    color:#3a5580;
+    margin-top:0.3rem;
+    text-transform:none;
+  }
+  .nav__menu{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    gap:0.6rem;
+    list-style:none;
+  }
+  .nav__menu a{
+    display:block;
+    font-family:var(--font-body);
+    font-size:0.82rem;
+    font-weight:700;
+    letter-spacing:0.08em;
+    color:#13223e;
+    text-decoration:none;
+    padding:0.55rem 1.05rem;
+    border:1px solid rgba(31,78,150,0.35);
+    border-radius:999px;
+    background:rgba(255,255,255,0.78);
+    white-space:nowrap;
+    transition:background 0.25s, border-color 0.25s, color 0.25s;
+  }
+  .nav__menu a:hover,
+  .nav__menu a:focus-visible{background:#1f4e96;border-color:#1f4e96;color:#fff}
+  .nav__menu a[aria-current="page"]{background:#1f4e96;border-color:#1f4e96;color:#fff}
+
+  /* ─── Page head ─── */
+  .rhead{
+    padding:9rem 2rem 4rem;
+    text-align:center;
+  }
+  .rhead__eyebrow{
+    font-family:var(--font-display);
+    font-size:0.72rem;
+    font-weight:600;
+    letter-spacing:0.35em;
+    color:var(--glow);
+    margin-bottom:1.1rem;
+  }
+  .rhead__title{
+    font-size:clamp(1.9rem, 6vw, 3rem);
+    font-weight:900;
+    color:var(--pale);
+    letter-spacing:0.06em;
+    line-height:1.4;
+    text-shadow:0 1px 12px rgba(255,255,255,0.85);
+  }
+  .rhead__lead{
+    font-size:clamp(0.95rem, 2.8vw, 1.15rem);
+    font-weight:700;
+    color:var(--pale);
+    line-height:2;
+    margin-top:1.4rem;
+    text-shadow:0 1px 12px rgba(255,255,255,0.85);
+  }
+
+  /* ─── Panels (same rhythm as the front page) ─── */
+  .panel{padding:5rem 2rem;background:rgba(255,255,255,0.82)}
+  .panel--alt{background:rgba(255,255,255,0.9)}
+  .panel--clear{background:transparent}
+  .panel__inner{max-width:960px;margin:0 auto}
+  .panel__eyebrow{
+    font-family:var(--font-display);
+    font-size:0.7rem;
+    font-weight:600;
+    letter-spacing:0.35em;
+    color:var(--glow);
+    margin-bottom:1rem;
+    text-align:center;
+  }
+  .panel__heading{
+    font-size:clamp(1.6rem, 4vw, 2.4rem);
+    font-weight:900;
+    color:var(--pale);
+    letter-spacing:0.04em;
+    margin-bottom:2.6rem;
+    text-align:center;
+  }
+  .panel__note{
+    font-size:0.98rem;
+    line-height:2.1;
+    color:var(--white);
+    text-align:center;
+    max-width:700px;
+    margin:0 auto;
+  }
+
+  /* ─── なぜ募集するのか ─── */
+  .why{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1rem;
+    margin-top:2.4rem;
+  }
+  .why__card{
+    padding:1.8rem 1.4rem;
+    border:1px solid rgba(31,78,150,0.28);
+    border-radius:14px;
+    background:rgba(255,255,255,0.9);
+  }
+  .why__num{
+    font-family:var(--font-display);
+    font-size:2.6rem;
+    font-weight:700;
+    line-height:1;
+    color:var(--glow);
+    font-variant-numeric:tabular-nums;
+  }
+  .why__num small{
+    font-family:var(--font-body);
+    font-size:0.32em;
+    font-weight:900;
+    letter-spacing:0.08em;
+    margin-left:0.2em;
+  }
+  .why__label{
+    font-size:0.88rem;
+    font-weight:700;
+    color:var(--pale);
+    line-height:1.9;
+    margin-top:0.7rem;
+  }
+
+  /* ─── 募集職種 ─── */
+  .jobs{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1.2rem;
+  }
+  .job{
+    padding:2rem 1.6rem;
+    border:1px solid rgba(31,78,150,0.28);
+    border-radius:16px;
+    background:rgba(255,255,255,0.92);
+  }
+  .job__tag{
+    display:inline-block;
+    font-family:var(--font-display);
+    font-size:0.62rem;
+    font-weight:600;
+    letter-spacing:0.22em;
+    color:#fff;
+    background:var(--glow);
+    border-radius:999px;
+    padding:0.35rem 0.9rem;
+    margin-bottom:1rem;
+  }
+  .job__name{
+    font-size:1.2rem;
+    font-weight:900;
+    color:var(--pale);
+    letter-spacing:0.03em;
+    line-height:1.6;
+  }
+  .job__desc{
+    font-size:0.9rem;
+    line-height:2;
+    color:var(--white);
+    margin-top:0.9rem;
+  }
+  .job__list{list-style:none;margin-top:1.2rem;display:grid;gap:0.5rem}
+  .job__list li{
+    position:relative;
+    padding-left:1.3rem;
+    font-size:0.88rem;
+    font-weight:700;
+    color:var(--pale);
+    line-height:1.8;
+  }
+  .job__list li::before{
+    content:'';
+    position:absolute;
+    left:0.1rem; top:0.62em;
+    width:0.5rem; height:0.5rem;
+    border-radius:50%;
+    background:var(--glow);
+  }
+
+  /* ─── 求める人物像 ─── */
+  .wanted{list-style:none;display:grid;gap:0.8rem;max-width:720px;margin:0 auto}
+  .wanted li{
+    padding:1.1rem 1.3rem 1.1rem 3.2rem;
+    position:relative;
+    border:1px solid rgba(31,78,150,0.25);
+    border-radius:12px;
+    background:rgba(255,255,255,0.9);
+    font-size:0.95rem;
+    font-weight:700;
+    color:var(--pale);
+    line-height:1.9;
+  }
+  .wanted li::before{
+    content:'✓';
+    position:absolute;
+    left:1.2rem; top:1.05rem;
+    font-size:1.05rem;
+    font-weight:700;
+    color:var(--glow);
+  }
+
+  /* ─── 募集要項 ─── */
+  .req{width:100%;border-collapse:collapse}
+  .req th,.req td{
+    text-align:left;
+    padding:1rem 0.8rem;
+    border-bottom:1px solid rgba(19,34,62,0.16);
+    font-size:0.92rem;
+    line-height:1.9;
+    vertical-align:top;
+  }
+  .req th{
+    width:11rem;
+    font-weight:900;
+    color:var(--pale);
+    letter-spacing:0.04em;
+    white-space:nowrap;
+  }
+  .req td{color:var(--white);font-weight:500}
+  .req td small{
+    display:block;
+    font-size:0.78rem;
+    color:var(--ice);
+    margin-top:0.3rem;
+    line-height:1.8;
+  }
+  .req__foot{
+    font-size:0.78rem;
+    line-height:1.9;
+    color:var(--ice);
+    margin-top:1.2rem;
+  }
+
+  /* ─── 選考フロー ─── */
+  .flow{
+    list-style:none;
+    counter-reset:step;
+    display:grid;
+    gap:0.9rem;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .flow li{
+    counter-increment:step;
+    position:relative;
+    padding:1.2rem 1.3rem 1.2rem 4rem;
+    border:1px solid rgba(31,78,150,0.25);
+    border-radius:12px;
+    background:rgba(255,255,255,0.9);
+    font-size:0.95rem;
+    font-weight:700;
+    color:var(--pale);
+    line-height:1.9;
+  }
+  .flow li::before{
+    content:counter(step);
+    position:absolute;
+    left:1.1rem; top:1.05rem;
+    width:1.9rem; height:1.9rem;
+    border-radius:50%;
+    background:var(--glow);
+    color:#fff;
+    font-family:var(--font-display);
+    font-size:0.9rem;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .flow li small{
+    display:block;
+    font-size:0.8rem;
+    font-weight:500;
+    color:var(--ice);
+    margin-top:0.25rem;
+    line-height:1.8;
+  }
+
+  /* ─── エントリー ─── */
+  .entry{
+    max-width:760px;
+    margin:0 auto;
+    text-align:center;
+    padding:2.6rem 1.6rem;
+    border:1px solid rgba(31,78,150,0.3);
+    border-radius:16px;
+    background:rgba(31,78,150,0.07);
+  }
+  .entry__lead{
+    font-size:clamp(1.1rem, 3.4vw, 1.5rem);
+    font-weight:900;
+    line-height:1.8;
+    color:var(--pale);
+  }
+  .entry__sub{
+    font-size:0.88rem;
+    line-height:2;
+    color:var(--white);
+    margin-top:1rem;
+  }
+  .entry__actions{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:0.7rem;
+    margin-top:1.7rem;
+  }
+  .btn-solid,.btn-ghost,.btn-line{
+    font-size:0.86rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-decoration:none;
+    padding:0.8rem 1.7rem;
+    border-radius:999px;
+    border:1px solid var(--glow);
+    transition:background 0.25s, color 0.25s, border-color 0.25s;
+  }
+  .btn-solid{background:var(--glow);color:#fff}
+  .btn-solid:hover,.btn-solid:focus-visible{background:#173d78;border-color:#173d78}
+  .btn-ghost{background:rgba(255,255,255,0.85);color:var(--pale)}
+  .btn-ghost:hover,.btn-ghost:focus-visible{background:var(--glow);color:#fff}
+  .btn-line{background:#06C755;border-color:#06C755;color:#fff}
+  .btn-line:hover,.btn-line:focus-visible{background:#05b04c;border-color:#05b04c}
+
+  /* ─── Footer ─── */
+  .site-foot{
+    padding:4rem 2rem 3rem;
+    text-align:center;
+    background:rgba(255,255,255,0.92);
+    border-top:1px solid rgba(19,34,62,0.14);
+  }
+  .site-foot__logo{width:auto;height:3rem;margin-bottom:1.1rem}
+  .site-foot__name{
+    font-family:var(--font-display);
+    font-size:0.92rem;
+    font-weight:600;
+    letter-spacing:0.24em;
+    color:var(--pale);
+  }
+  .site-foot__jp{
+    font-size:0.76rem;
+    font-weight:700;
+    letter-spacing:0.16em;
+    color:var(--ice);
+    margin-top:0.45rem;
+  }
+  .site-foot__back{
+    display:inline-block;
+    margin-top:1.8rem;
+    font-size:0.82rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    color:var(--glow);
+    text-decoration:none;
+    border-bottom:1px solid rgba(31,78,150,0.4);
+    padding-bottom:0.2rem;
+  }
+  .site-foot__copy{
+    font-family:var(--font-display);
+    font-size:0.6rem;
+    font-weight:300;
+    letter-spacing:0.2em;
+    color:var(--ice);
+    opacity:0.55;
+    margin-top:2rem;
+  }
+
+  @media(max-width:768px){
+    .nav{padding:0.75rem 0.8rem;flex-direction:column;align-items:stretch;gap:0.6rem}
+    .nav__brand{font-size:1.1rem;text-align:center;letter-spacing:0.12em}
+    .nav__brand-text span{font-size:0.6rem;letter-spacing:0.1em;margin-top:0.2rem}
+    .nav__menu{
+      justify-content:center;
+      gap:0.3rem;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scrollbar-width:none;
+      -webkit-overflow-scrolling:touch;
+    }
+    .nav__menu::-webkit-scrollbar{display:none}
+    .nav__menu a{font-size:0.68rem;padding:0.38rem 0.58rem;letter-spacing:0}
+    .rhead{padding:10.5rem 1.5rem 3rem}
+  }
+
+  @media(max-width:600px){
+    .panel{padding:3.5rem 1.5rem}
+    .req th,.req td{display:block;width:auto;padding:0.55rem 0}
+    .req th{border-bottom:none;padding-bottom:0.15rem}
+    .entry{padding:2rem 1.1rem}
+  }
+
+  @media(max-width:360px){
+    .nav{padding:0.7rem 0.55rem}
+    .nav__brand{font-size:1rem}
+    .nav__menu{gap:0.22rem}
+    .nav__menu a{font-size:0.62rem;padding:0.34rem 0.45rem}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav__brand">
+    <img class="nav__mark" src="images/mark-earthia.png" alt="" width="300" height="224">
+    <span class="nav__brand-text">EARTHIA
+      <span>株式会社EARTHIA工業</span>
+    </span>
+  </a>
+  <ul class="nav__menu">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#service">事業内容</a></li>
+    <li><a href="index.html#record">実績</a></li>
+    <li><a href="index.html#company">会社概要</a></li>
+    <li><a href="recruit.html" aria-current="page">採用情報</a></li>
+    <li><a href="index.html#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<div class="sky" aria-hidden="true"></div>
+
+<main>
+
+<header class="rhead">
+  <p class="rhead__eyebrow">RECRUIT</p>
+  <h1 class="rhead__title"><span class="clause">綺麗な未来を、</span><span class="clause">一緒に創る仲間へ。</span></h1>
+  <p class="rhead__lead">
+    <span class="clause">株式会社EARTHIA工業では、</span><span class="clause">清掃部門 Re:Life Works と工業部門で、</span><span class="clause">一緒に働く仲間を募集しています。</span>
+  </p>
+</header>
+
+<!-- ─── なぜ募集するのか ─── -->
+<section class="panel">
+  <div class="panel__inner">
+    <p class="panel__eyebrow">WHY NOW</p>
+    <h2 class="panel__heading">仕事が、追いつかなくなりました。</h2>
+    <p class="panel__note">
+      <span class="clause">おかげさまで、</span><span class="clause">2ヶ月で県内外の企業様50社以上と</span><span class="clause">ご契約いただきました。</span>
+      <span class="clause">現場は増え続けていて、</span><span class="clause">いまいちばん足りないのは</span><span class="clause">「人」です。</span>
+      <span class="clause">経験の有無より、</span><span class="clause">続けて覚えていける方を</span><span class="clause">お待ちしています。</span>
+    </p>
+
+    <div class="why">
+      <div class="why__card">
+        <p class="why__num">50<small>社以上</small></p>
+        <p class="why__label">2ヶ月でご契約いただいた企業様の数</p>
+      </div>
+      <div class="why__card">
+        <p class="why__num">2<small>部門</small></p>
+        <p class="why__label">清掃部門 Re:Life Works と工業部門</p>
+      </div>
+      <div class="why__card">
+        <p class="why__num">福井<small>拠点</small></p>
+        <p class="why__label">福井市を拠点に、県内外の現場へ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 募集職種 ─── -->
+<section class="panel panel--alt">
+  <div class="panel__inner">
+    <p class="panel__eyebrow">POSITIONS</p>
+    <h2 class="panel__heading">募集職種</h2>
+
+    <div class="jobs">
+      <div class="job">
+        <span class="job__tag">CLEANING</span>
+        <p class="job__name">清掃スタッフ<br>（Re:Life Works 部門）</p>
+        <p class="job__desc">
+          <span class="clause">飲食店の厨房から</span><span class="clause">施設の隅々まで、</span><span class="clause">チームで現場に入り、</span><span class="clause">段取りよく仕上げていく仕事です。</span>
+        </p>
+        <ul class="job__list">
+          <li>空調清掃</li>
+          <li>エアコン分解洗浄</li>
+          <li>グリストラップ清掃</li>
+          <li>高圧洗浄</li>
+          <li>害虫駆除</li>
+          <li>各種メンテナンス</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <span class="job__tag">INDUSTRY</span>
+        <p class="job__name">工業部門スタッフ</p>
+        <p class="job__desc">
+          <span class="clause">土木・建設・プラントの現場で、</span><span class="clause">施工や人材の手配に</span><span class="clause">携わっていただきます。</span>
+        </p>
+        <ul class="job__list">
+          <li>土木</li>
+          <li>建設</li>
+          <li>プラント</li>
+          <li>人材</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 求める人物像 ─── -->
+<section class="panel">
+  <div class="panel__inner">
+    <p class="panel__eyebrow">WHO WE WANT</p>
+    <h2 class="panel__heading">こんな方をお待ちしています</h2>
+    <ul class="wanted">
+      <li><span class="clause">未経験からでも、</span><span class="clause">ひとつずつ覚えていきたい方</span></li>
+      <li><span class="clause">仕上がりに納得がいくまで、</span><span class="clause">手を抜かずにやりきれる方</span></li>
+      <li><span class="clause">チームで動くことを</span><span class="clause">面倒だと思わない方</span></li>
+      <li><span class="clause">お客様の前で、</span><span class="clause">きちんと挨拶ができる方</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─── 募集要項 ─── -->
+<section class="panel panel--alt">
+  <div class="panel__inner">
+    <p class="panel__eyebrow">REQUIREMENTS</p>
+    <h2 class="panel__heading">募集要項</h2>
+    <table class="req">
+      <tbody>
+        <tr>
+          <th>募集職種</th>
+          <td>清掃スタッフ（Re:Life Works 部門）／工業部門スタッフ</td>
+        </tr>
+        <tr>
+          <th>仕事内容</th>
+          <td>
+            空調清掃、エアコン分解洗浄、グリストラップ清掃、高圧洗浄、害虫駆除、各種メンテナンス／土木・建設・プラント・人材
+            <small>ご経験やご希望をうかがったうえで、担当する現場を決めていきます。</small>
+          </td>
+        </tr>
+        <tr>
+          <th>勤務地</th>
+          <td>
+            〒918-8203　福井県福井市上北野1-18-17 1F右扉（本社）
+            <small>福井県内および近県の各現場へ、本社から向かいます。</small>
+          </td>
+        </tr>
+        <!-- 条件が固まったら、この1行を下の6行に置き換えてください。
+             職業安定法上、募集にあたっては 業務内容・契約期間・就業場所・
+             労働時間・賃金・社会保険の加入状況 の明示が求められます。
+          <tr><th>雇用形態</th><td>正社員／パート・アルバイト</td></tr>
+          <tr><th>契約期間</th><td>期間の定めなし</td></tr>
+          <tr><th>給与</th><td>月給 ○○円 〜 ○○円（経験・能力を考慮）</td></tr>
+          <tr><th>勤務時間</th><td>8:00 〜 17:00（休憩60分）</td></tr>
+          <tr><th>休日・休暇</th><td>週休2日制、年末年始、夏季休暇</td></tr>
+          <tr><th>待遇・福利厚生</th><td>各種社会保険完備、交通費支給</td></tr>
+        -->
+        <tr>
+          <th>勤務条件</th>
+          <td>
+            雇用形態・契約期間・給与・勤務時間・休日・待遇
+            <small>ご経験とご希望をうかがったうえで決定します。具体的な条件は面談時に書面でご説明します。</small>
+          </td>
+        </tr>
+        <tr>
+          <th>応募資格</th>
+          <td>
+            経験不問
+            <small>資格や免許の要否は、ご希望の職種にあわせてご案内します。まずはお気軽にお問い合わせください。</small>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="req__foot">
+      <span class="clause">※ 勤務条件の詳細は、</span><span class="clause">面談時に労働条件通知書にて</span><span class="clause">明示いたします。</span>
+    </p>
+  </div>
+</section>
+
+<!-- ─── 選考フロー ─── -->
+<section class="panel">
+  <div class="panel__inner">
+    <p class="panel__eyebrow">PROCESS</p>
+    <h2 class="panel__heading">応募から入社まで</h2>
+    <ol class="flow">
+      <li>お問い合わせ<small>お電話・メール・LINEのいずれでも受け付けています。</small></li>
+      <li>面談<small>仕事の内容と条件をご説明し、ご希望をうかがいます。</small></li>
+      <li>ご連絡<small>面談の結果を、あらためてご連絡します。</small></li>
+      <li>入社<small>入社日を相談のうえ決定します。</small></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ─── エントリー ─── -->
+<section class="panel panel--clear">
+  <div class="entry">
+    <p class="entry__lead">
+      <span class="clause">まずは、</span><span class="clause">話を聞くだけでも大丈夫です。</span>
+    </p>
+    <p class="entry__sub">
+      <span class="clause">「採用情報を見た」と</span><span class="clause">お伝えください。</span>
+      <span class="clause">履歴書のご用意は、</span><span class="clause">面談が決まってからで構いません。</span>
+    </p>
+    <div class="entry__actions">
+      <a class="btn-solid" href="tel:09032900005">090-3290-0005</a>
+      <a class="btn-line" href="https://lin.ee/9ytFn1m" target="_blank" rel="noopener">LINEで応募</a>
+      <a class="btn-ghost" href="mailto:earth67@outlook.jp?subject=%E6%8E%A1%E7%94%A8%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">earth67@outlook.jp</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <img class="site-foot__logo" src="images/mark-earthia.png"
+       alt="" width="300" height="224" loading="lazy">
+  <p class="site-foot__name">EARTHIA INDUSTRIES CO., LTD.</p>
+  <p class="site-foot__jp">株式会社EARTHIA工業</p>
+  <a class="site-foot__back" href="index.html">&larr; トップページへ戻る</a>
+  <p class="site-foot__copy">&copy; EARTHIA INDUSTRIES CO., LTD.</p>
+</footer>
+
+</body>
+</html>
