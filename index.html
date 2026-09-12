@@ -181,9 +181,14 @@
     text-align:center;
     padding:2rem;
   }
+  /* Japanese wraps at any character, so a narrow screen cuts straight through a
+     word. Each clause is an inline-block, leaving the browser nowhere to break
+     but between clauses. */
+  .clause{display:inline-block}
+
   .hero__tagline{
     font-family:var(--font-body);
-    font-size:clamp(1.6rem, 4.5vw, 3.5rem);
+    font-size:clamp(1.35rem, 4.5vw, 3.5rem);
     font-weight:900;
     letter-spacing:0.06em;
     color:var(--pale);
@@ -334,7 +339,7 @@
   }
   .intro__heading{
     font-family:var(--font-body);
-    font-size:clamp(1.4rem, 3.5vw, 2.2rem);
+    font-size:clamp(1.2rem, 3.5vw, 2.2rem);
     font-weight:700;
     line-height:2;
     color:var(--pale);
@@ -849,11 +854,33 @@
   @media(max-width:768px){
     /* The menu used to be hidden here, which left phone visitors with no way
        to reach any section but by scrolling the whole page. */
-    .nav{padding:0.9rem 1rem; flex-direction:column; align-items:stretch; gap:0.7rem}
-    .nav__brand{font-size:1.15rem; text-align:center}
-    .nav__brand span{font-size:0.62rem; letter-spacing:0.12em}
-    .nav__menu{justify-content:center; gap:0.4rem}
-    .nav__menu a{font-size:0.7rem; padding:0.4rem 0.7rem; letter-spacing:0.02em}
+    .nav{padding:0.75rem 0.8rem; flex-direction:column; align-items:stretch; gap:0.6rem}
+    .nav__brand{font-size:1.1rem; text-align:center; letter-spacing:0.12em}
+    .nav__brand span{font-size:0.6rem; letter-spacing:0.1em; margin-top:0.2rem}
+    /* All five have to sit on one line: wrapping left お問い合わせ stranded on a
+       row of its own, which read as the bar being crooked. */
+    .nav__menu{
+      justify-content:center;
+      gap:0.3rem;
+      flex-wrap:nowrap;
+      /* last resort on very narrow phones: slide rather than clip */
+      overflow-x:auto;
+      scrollbar-width:none;
+      -webkit-overflow-scrolling:touch;
+    }
+    .nav__menu::-webkit-scrollbar{display:none}
+    .nav__menu a{
+      font-size:0.68rem;
+      padding:0.38rem 0.58rem;
+      letter-spacing:0;
+    }
+  }
+
+  @media(max-width:360px){
+    .nav{padding:0.7rem 0.55rem}
+    .nav__brand{font-size:1rem}
+    .nav__menu{gap:0.22rem}
+    .nav__menu a{font-size:0.62rem; padding:0.34rem 0.45rem}
     .sound-toggle{right:1.5rem;bottom:1.5rem}
     .koesa-sig{left:1.5rem;bottom:1.5rem}
     .ai-note{left:1.5rem;bottom:3.4rem;right:1.5rem;font-size:0.6rem}
@@ -960,11 +987,7 @@
 
 <section class="intro" id="about">
   <p class="intro__eyebrow">PROFESSIONAL WORK, FAIR PRICE</p>
-  <h2 class="intro__heading">
-    飲食店の厨房から、施設の隅々まで。<br>
-    現場を知り尽くした若いチームが、<br>
-    ムダのない段取りで、確実に仕上げます。
-  </h2>
+  <h2 class="intro__heading"><span class="clause">飲食店の厨房から、</span><span class="clause">施設の隅々まで。</span><span class="clause">現場を知り尽くした</span><span class="clause">若いチームが、</span><span class="clause">ムダのない段取りで、</span><span class="clause">確実に仕上げます。</span></h2>
   <div class="intro__divider"></div>
   <p class="intro__tagline">綺麗な未来を創る！</p>
 </section>
@@ -1226,14 +1249,35 @@
   let watchdog = null;
   let handingOver = false;
 
+  // Split on the Japanese comma and give each clause its own inline-block, so a
+  // narrow screen breaks between clauses instead of through a word. Written as a
+  // loop rather than a lookbehind regex, which older iOS does not support.
+  function setCopy(el, text) {
+    el.textContent = '';
+    if (!text) return;
+    const parts = [];
+    let buf = '';
+    for (const ch of text) {
+      buf += ch;
+      if (ch === '、') { parts.push(buf); buf = ''; }
+    }
+    if (buf) parts.push(buf);
+    parts.forEach(t => {
+      const span = document.createElement('span');
+      span.className = 'clause';
+      span.textContent = t;
+      el.appendChild(span);
+    });
+  }
+
   // Show first scene text
   const first = sequence[0];
   if (first.hide) {
     tagline.style.display = 'none';
     subtitle.style.display = 'none';
   } else {
-    tagline.textContent = first.tag;
-    subtitle.textContent = first.sub;
+    setCopy(tagline, first.tag);
+    setCopy(subtitle, first.sub);
   }
 
   // Sound stays off until the visitor asks for it: muted playback is the only
@@ -1335,8 +1379,8 @@
       } else {
         tagline.style.display = '';
         subtitle.style.display = '';
-        tagline.textContent  = seq.tag;
-        subtitle.textContent = seq.sub;
+        setCopy(tagline, seq.tag);
+        setCopy(subtitle, seq.sub);
       }
       tagline.classList.remove('exit');
       subtitle.classList.remove('exit');
