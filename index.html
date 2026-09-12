@@ -113,42 +113,61 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:2rem 3rem;
+    gap:1.5rem;
+    padding:1.3rem 2.5rem;
+    /* the bar sits over bright daylight footage, so it needs its own ground */
+    background:linear-gradient(180deg, rgba(10,14,26,0.92) 0%, rgba(10,14,26,0.72) 60%, rgba(10,14,26,0) 100%);
   }
   .nav__brand{
     font-family:var(--font-display);
-    font-size:0.85rem;
-    font-weight:500;
-    letter-spacing:0.25em;
-    color:var(--ice);
+    font-size:1.45rem;
+    font-weight:700;
+    letter-spacing:0.16em;
+    color:#fff;
     text-transform:uppercase;
     text-decoration:none;
+    line-height:1.15;
+    text-shadow:0 2px 10px rgba(0,0,0,0.6);
   }
   .nav__brand span{
     display:block;
-    font-size:0.55rem;
-    font-weight:300;
-    letter-spacing:0.35em;
+    font-family:var(--font-body);
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.18em;
     color:var(--ice);
-    opacity:0.5;
-    margin-top:0.25rem;
+    opacity:0.85;
+    margin-top:0.3rem;
+    text-transform:none;
   }
   .nav__menu{
     display:flex;
-    gap:2.5rem;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    gap:0.6rem;
     list-style:none;
   }
   .nav__menu a{
-    font-family:var(--font-display);
-    font-size:0.72rem;
-    font-weight:300;
-    letter-spacing:0.18em;
-    color:var(--ice);
+    display:block;
+    font-family:var(--font-body);
+    font-size:0.82rem;
+    font-weight:700;
+    letter-spacing:0.08em;
+    color:#fff;
     text-decoration:none;
-    opacity:0.6;
-    transition:opacity 0.4s;
+    padding:0.55rem 1.05rem;
+    border:1px solid rgba(184,204,232,0.4);
+    border-radius:999px;
+    background:rgba(10,14,26,0.55);
+    white-space:nowrap;
+    transition:background 0.25s, border-color 0.25s, color 0.25s;
   }
-  .nav__menu a:hover{opacity:1}
+  .nav__menu a:hover,
+  .nav__menu a:focus-visible{
+    background:var(--glow);
+    border-color:var(--glow);
+    color:#fff;
+  }
 
   /* ─── Hero text ─── */
   .hero__content{
@@ -688,8 +707,13 @@
   }
 
   @media(max-width:768px){
-    .nav{padding:1.5rem 1.5rem}
-    .nav__menu{display:none}
+    /* The menu used to be hidden here, which left phone visitors with no way
+       to reach any section but by scrolling the whole page. */
+    .nav{padding:0.9rem 1rem; flex-direction:column; align-items:stretch; gap:0.7rem}
+    .nav__brand{font-size:1.15rem; text-align:center}
+    .nav__brand span{font-size:0.62rem; letter-spacing:0.12em}
+    .nav__menu{justify-content:center; gap:0.4rem}
+    .nav__menu a{font-size:0.7rem; padding:0.4rem 0.7rem; letter-spacing:0.02em}
     .sound-toggle{right:1.5rem;bottom:1.5rem}
     .koesa-sig{left:1.5rem;bottom:1.5rem}
     .ai-note{left:1.5rem;bottom:3.4rem;right:1.5rem;font-size:0.6rem}
@@ -727,43 +751,43 @@
   </div>
   <!-- 2 出動 チーム登場 -->
   <div class="hero__slide">
-    <video muted playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline preload="none">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_025106_f91209c8-812f-4878-9fcd-e15119e3485b.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 3 窓を拭く手元 -->
   <div class="hero__slide">
-    <video muted playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline preload="none">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_0c5ed526-cf5e-4c3d-9556-c25f44c139ec.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 4 厨房 チームワーク -->
   <div class="hero__slide">
-    <video muted playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline preload="none">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041847_f41d3d03-41d1-4ec3-ab67-a6ec99274b84.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 5 グリストラップ -->
   <div class="hero__slide">
-    <video muted playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline preload="none">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_452d3840-c634-4f30-8f03-ad4e00066f88.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 6 仕上がり -->
   <div class="hero__slide">
-    <video muted playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline preload="none">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_27f5850e-a93f-417f-8639-2d2e1916dd8d.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 7 店主の笑顔 -->
   <div class="hero__slide">
-    <video muted playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline preload="none">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_c6732029-2ddd-40ef-8939-e477a4852609.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 8 チーム集合 ラスト -->
   <div class="hero__slide">
-    <video muted playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline preload="none">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_81ffc495-d9a7-4e84-9f73-85d2f5aaa871.mp4" type="video/mp4">
     </video>
   </div>
@@ -795,15 +819,14 @@
 <a href="#" class="koesa-sig">Designed by KOESA Co., Ltd.</a>
 
 <section class="intro" id="about">
-  <p class="intro__eyebrow">Kind to Earth, Kind to People</p>
+  <p class="intro__eyebrow">PROFESSIONAL WORK, FAIR PRICE</p>
   <h2 class="intro__heading">
-    掃除文化が生んだ集団、<br>
-    EARTHIA INDUSTRIESが挑む<br>
-    福井・北陸クリーンアップ作戦。<br>
-    「掃除文化」は、綺麗な未来にする。
+    飲食店の厨房から、施設の隅々まで。<br>
+    現場を知り尽くした若いチームが、<br>
+    ムダのない段取りで、確実に仕上げます。
   </h2>
   <div class="intro__divider"></div>
-  <p class="intro__tagline">掃除文化を未来へ</p>
+  <p class="intro__tagline">綺麗な未来を創る！</p>
 </section>
 
 <!-- ─── BEFORE / AFTER ─── -->
@@ -1022,13 +1045,25 @@
   // kind mobile browsers will autoplay.
   let soundOn = false;
 
+  // Only two clips are ever in flight: the one playing and the one after it.
+  // Letting all eight fetch at once splits the connection eight ways and the
+  // visible clip is the one that runs dry.
+  function preloadNext(idx) {
+    const next = slides[(idx + 1) % total].querySelector('video');
+    if (!next || next.dataset.warmed) return;
+    next.dataset.warmed = '1';
+    next.preload = 'auto';
+    next.load();
+  }
+
   // Play active video
   function manageMedia(idx) {
     slides.forEach((s, i) => {
       const vid = s.querySelector('video');
       if (!vid) return;
       if (i === idx) {
-        vid.currentTime = 0;
+        vid.preload = 'auto';
+        try { vid.currentTime = 0; } catch (e) {}
         vid.muted = !soundOn;
         const p = vid.play();
         if (p) p.catch(()=>{});
@@ -1036,6 +1071,7 @@
         vid.pause();
       }
     });
+    preloadNext(idx);
   }
   manageMedia(0);
 
@@ -1060,13 +1096,19 @@
     const vid = slide.querySelector('video');
     if (!vid) return;
     vid.addEventListener('ended', () => { if (i === current) transition(); });
+    // A clip that is merely buffering is still making progress, so the stall
+    // timer is pushed back on every frame rather than counting from the start.
+    vid.addEventListener('timeupdate', () => { if (i === current) armWatchdog(); });
+    // A clip that will never arrive should not hold the whole film up.
+    vid.addEventListener('error', () => { if (i === current) transition(); });
   });
 
+  // Fires only when the active clip has gone quiet for this long without
+  // reaching its end — a stall, a dead URL, a tab the browser froze.
+  const STALL_MS = 9000;
   function armWatchdog() {
     clearTimeout(watchdog);
-    const vid = slides[current].querySelector('video');
-    const clip = vid && isFinite(vid.duration) && vid.duration > 0 ? vid.duration * 1000 : 8000;
-    watchdog = setTimeout(transition, clip + 4000);
+    watchdog = setTimeout(transition, STALL_MS);
   }
   armWatchdog();
 
