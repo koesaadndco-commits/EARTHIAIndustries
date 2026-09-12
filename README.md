@@ -116,9 +116,10 @@ KOESA のクレジット（`.koesa-sig`）は、KOESA のロゴバッジ＋筆�
 **バッジはほぼ全面が青のグラデーションなので、減色するとバンディングが出ます。**
 192色＋Floyd–Steinberg ディザで抑えてあります。
 
-⚠ `href` は **`https://www.instagram.com/`（Instagram のトップ）のままです。**
-KOESA のアカウント URL をもらい次第、両ファイルの `TODO` コメントの箇所を差し替えてください。
-誤ったアカウントへ訪問者を送らないため、推測では入れていません。
+リンク先は `https://www.instagram.com/koesa_solutions_studio/` です。
+支給された URL には `stkn=…` と `utm_source=qr` が付いていましたが、**どちらも外してあります**。
+`stkn` は QR から生成された共有リンクに紐づく共有トークン、`utm_source=qr` は QR 経由の
+計測用パラメータで、サイトに焼き込むものではありません。プロフィールの正規 URL だけを置いています。
 
 筆記体は Great Vibes ですが、`--font-script` の末尾に
 Snell Roundhand / Apple Chancery / Segoe Script を並べてあります。
