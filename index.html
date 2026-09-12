@@ -455,6 +455,203 @@
     letter-spacing:0.1em;
   }
 
+
+  /* ─── SERVICE / COMPANY / CONTACT ─── */
+  /* The nav is fixed, so an anchor jump would otherwise tuck the heading under it */
+  #about, #works, #service, #company, #contact{scroll-margin-top:5.5rem}
+
+  .panel{
+    background:var(--deep);
+    padding:6rem 2rem;
+  }
+  .panel--alt{background:var(--navy)}
+  .panel__inner{max-width:960px;margin:0 auto}
+  .panel__eyebrow{
+    font-family:var(--font-display);
+    font-size:0.7rem;
+    font-weight:600;
+    letter-spacing:0.35em;
+    color:var(--glow);
+    margin-bottom:1rem;
+    text-align:center;
+  }
+  .panel__heading{
+    font-family:var(--font-body);
+    font-size:clamp(1.6rem, 4vw, 2.4rem);
+    font-weight:900;
+    color:var(--pale);
+    letter-spacing:0.04em;
+    margin-bottom:3rem;
+    text-align:center;
+  }
+
+  /* 事業内容 */
+  .service-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:1px;
+    background:rgba(74,124,201,0.18);
+    border:1px solid rgba(74,124,201,0.18);
+  }
+  .service-list li{
+    list-style:none;
+    background:var(--deep);
+    padding:1.4rem 1.5rem;
+    font-family:var(--font-body);
+    font-size:0.95rem;
+    font-weight:500;
+    color:var(--white);
+    letter-spacing:0.05em;
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+  }
+  .service-list li::before{
+    content:'';
+    flex:none;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--glow);
+  }
+
+  /* 会社概要 */
+  .company-table{
+    width:100%;
+    border-collapse:collapse;
+    font-family:var(--font-body);
+  }
+  .company-table th,
+  .company-table td{
+    text-align:left;
+    padding:1.1rem 0.5rem;
+    border-bottom:1px solid rgba(184,204,232,0.14);
+    vertical-align:top;
+    font-size:0.95rem;
+  }
+  .company-table th{
+    width:11rem;
+    font-weight:700;
+    color:var(--ice);
+    letter-spacing:0.12em;
+    white-space:nowrap;
+  }
+  .company-table td{font-weight:500;color:var(--white);line-height:1.8}
+  .company-table td small{
+    display:block;
+    font-size:0.8rem;
+    font-weight:400;
+    color:var(--ice);
+    opacity:0.65;
+    margin-top:0.3rem;
+    letter-spacing:0.06em;
+  }
+
+  /* お問い合わせ */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:1.2rem;
+    margin-bottom:2.5rem;
+  }
+  .contact-card{
+    display:block;
+    text-decoration:none;
+    background:var(--slate);
+    border:1px solid rgba(74,124,201,0.25);
+    border-radius:6px;
+    padding:1.8rem 1.5rem;
+    text-align:center;
+    transition:border-color 0.3s, transform 0.3s;
+  }
+  a.contact-card:hover{
+    border-color:var(--glow);
+    transform:translateY(-2px);
+  }
+  .contact-card__label{
+    font-family:var(--font-display);
+    font-size:0.65rem;
+    font-weight:600;
+    letter-spacing:0.3em;
+    color:var(--glow);
+    display:block;
+    margin-bottom:0.7rem;
+  }
+  .contact-card__value{
+    font-family:var(--font-body);
+    font-size:clamp(1.05rem, 2.6vw, 1.4rem);
+    font-weight:900;
+    color:var(--white);
+    letter-spacing:0.04em;
+    word-break:break-all;
+  }
+  .contact-card__note{
+    display:block;
+    font-size:0.75rem;
+    font-weight:400;
+    color:var(--ice);
+    opacity:0.6;
+    margin-top:0.6rem;
+    letter-spacing:0.08em;
+  }
+  .contact-address{
+    text-align:center;
+    font-family:var(--font-body);
+    font-size:0.95rem;
+    font-weight:500;
+    color:var(--white);
+    line-height:2;
+    letter-spacing:0.06em;
+  }
+  .contact-address span{
+    display:block;
+    font-size:0.78rem;
+    font-weight:400;
+    color:var(--ice);
+    opacity:0.6;
+    letter-spacing:0.14em;
+  }
+
+  /* フッター */
+  .site-foot{
+    background:var(--deep);
+    border-top:1px solid rgba(184,204,232,0.12);
+    padding:2.5rem 2rem 3rem;
+    text-align:center;
+  }
+  .site-foot__name{
+    font-family:var(--font-display);
+    font-size:0.95rem;
+    font-weight:600;
+    letter-spacing:0.28em;
+    color:var(--ice);
+  }
+  .site-foot__jp{
+    font-family:var(--font-body);
+    font-size:0.8rem;
+    font-weight:500;
+    color:var(--ice);
+    opacity:0.6;
+    letter-spacing:0.14em;
+    margin-top:0.4rem;
+  }
+  .site-foot__copy{
+    font-family:var(--font-display);
+    font-size:0.6rem;
+    font-weight:300;
+    letter-spacing:0.2em;
+    color:var(--ice);
+    opacity:0.35;
+    margin-top:1.6rem;
+  }
+
+  @media(max-width:600px){
+    .panel{padding:4rem 1.5rem}
+    .company-table th,
+    .company-table td{display:block;width:auto;padding:0.6rem 0}
+    .company-table th{border-bottom:none;padding-bottom:0.2rem}
+  }
+
   @media(max-width:768px){
     .nav{padding:1.5rem 1.5rem}
     .nav__menu{display:none}
@@ -475,9 +672,10 @@
   </a>
   <ul class="nav__menu">
     <li><a href="#about">About</a></li>
-    <li><a href="#service">Service</a></li>
-    <li><a href="#culture">Culture</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#service">事業内容</a></li>
+    <li><a href="#works">実績</a></li>
+    <li><a href="#company">会社概要</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
   </ul>
 </nav>
 
@@ -568,7 +766,7 @@
 </section>
 
 <!-- ─── BEFORE / AFTER ─── -->
-<section class="ba-section" id="service">
+<section class="ba-section" id="works">
   <p class="ba-section__eyebrow">RESULTS</p>
   <h2 class="ba-section__heading">グリストラップ清掃実績</h2>
   <p class="ba-section__sub">飲食店の衛生管理を支える、プロの仕事。</p>
@@ -642,6 +840,95 @@
     </div>
   </div>
 </section>
+
+<!-- ─── 事業内容 ─── -->
+<section class="panel panel--alt" id="service">
+  <div class="panel__inner">
+    <p class="panel__eyebrow">SERVICE</p>
+    <h2 class="panel__heading">事業内容</h2>
+    <ul class="service-list">
+      <li>土木一式工事</li>
+      <li>板金工事一式</li>
+      <li>建設工事</li>
+      <li>企画／イベント設営・管理</li>
+      <li>請負及びコンサルティング業</li>
+      <li>一般労働者派遣業</li>
+      <li>プラント設備設計</li>
+      <li>制作／販売及び施工並びに保守</li>
+      <li>前各号に付帯する一切の業務</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─── 会社概要 ─── -->
+<section class="panel" id="company">
+  <div class="panel__inner">
+    <p class="panel__eyebrow">COMPANY</p>
+    <h2 class="panel__heading">会社概要</h2>
+    <table class="company-table">
+      <tbody>
+        <tr>
+          <th>会社名</th>
+          <td>株式会社EARTHIA工業<small>EARTHIA INDUSTRIES CO., LTD.</small></td>
+        </tr>
+        <tr>
+          <th>代表者</th>
+          <td>代表取締役　菅谷 勇貴<small>YUKI SUGAYA</small></td>
+        </tr>
+        <tr>
+          <th>所在地</th>
+          <td>〒918-8203　福井県福井市上北野1-18-17 1F右扉</td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <td><a href="tel:09032900005" style="color:inherit">090-3290-0005</a></td>
+        </tr>
+        <tr>
+          <th>FAX</th>
+          <td>0776-76-2352</td>
+        </tr>
+        <tr>
+          <th>メール</th>
+          <td><a href="mailto:earth67@outlook.jp" style="color:inherit">earth67@outlook.jp</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── お問い合わせ ─── -->
+<section class="panel panel--alt" id="contact">
+  <div class="panel__inner">
+    <p class="panel__eyebrow">CONTACT</p>
+    <h2 class="panel__heading">ご相談・ご依頼</h2>
+    <div class="contact-grid">
+      <a class="contact-card" href="tel:09032900005">
+        <span class="contact-card__label">TEL</span>
+        <span class="contact-card__value">090-3290-0005</span>
+        <span class="contact-card__note">タップで発信できます</span>
+      </a>
+      <a class="contact-card" href="mailto:earth67@outlook.jp">
+        <span class="contact-card__label">MAIL</span>
+        <span class="contact-card__value">earth67@outlook.jp</span>
+        <span class="contact-card__note">お見積りのご依頼はこちら</span>
+      </a>
+      <div class="contact-card">
+        <span class="contact-card__label">FAX</span>
+        <span class="contact-card__value">0776-76-2352</span>
+      </div>
+    </div>
+    <p class="contact-address">
+      <span>〒918-8203</span>
+      福井県福井市上北野1-18-17 1F右扉
+    </p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <p class="site-foot__name">EARTHIA INDUSTRIES CO., LTD.</p>
+  <p class="site-foot__jp">株式会社EARTHIA工業</p>
+  <p class="site-foot__copy">&copy; EARTHIA INDUSTRIES CO., LTD.</p>
+</footer>
 
 <script>
   const slides  = document.querySelectorAll('.hero__slide');
