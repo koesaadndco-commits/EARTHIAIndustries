@@ -643,6 +643,56 @@
   }
   .panel--alt .service-list li{background:var(--navy)}
 
+  /* The four promises from the flyer: the reasons to call rather than the
+     services themselves, so they sit above the list. */
+  .promise{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
+    gap:0.6rem;
+    list-style:none;
+    margin-bottom:1.6rem;
+  }
+  .promise li{
+    background:rgba(47,102,189,0.1);
+    border:1px solid rgba(74,124,201,0.3);
+    border-radius:6px;
+    padding:0.85rem 1rem;
+    font-family:var(--font-body);
+    font-size:0.78rem;
+    font-weight:500;
+    color:var(--ice);
+    letter-spacing:0.04em;
+    line-height:1.6;
+  }
+  .promise strong{
+    display:block;
+    font-size:0.98rem;
+    font-weight:900;
+    color:var(--pale);
+    letter-spacing:0.06em;
+    margin-bottom:0.2rem;
+  }
+
+  .svc__price{
+    margin-left:auto;
+    font-family:var(--font-body);
+    font-size:0.82rem;
+    font-weight:700;
+    color:var(--glow);
+    letter-spacing:0.02em;
+    white-space:nowrap;
+  }
+  .svc-also{
+    margin-top:1.6rem;
+    font-family:var(--font-body);
+    font-size:0.86rem;
+    font-weight:400;
+    line-height:2;
+    letter-spacing:0.04em;
+    color:var(--ice);
+  }
+  .svc-also strong{font-weight:700;color:var(--pale)}
+
   .svc{
     border:1px solid rgba(74,124,201,0.25);
     border-radius:6px;
@@ -670,6 +720,11 @@
   }
   .svc__btn:hover,
   .svc__btn:focus-visible{background:rgba(74,124,201,0.16)}
+  @media(max-width:560px){
+    .svc__btn{flex-wrap:wrap; row-gap:0.35rem}
+    .svc__price{margin-left:0; flex-basis:100%; order:3}
+    .svc__mark{order:2}
+  }
   .svc__mark{
     flex:none;
     width:26px;
@@ -782,6 +837,15 @@
     margin-top:0.6rem;
     letter-spacing:0.08em;
   }
+  .contact-card--line{
+    background:#06C755;
+    border-color:#06C755;
+  }
+  .contact-card--line .contact-card__label,
+  .contact-card--line .contact-card__value{color:#fff}
+  .contact-card--line .contact-card__note{color:#fff; opacity:0.85}
+  a.contact-card--line:hover{border-color:#06C755; background:#05b04c}
+
   .contact-address{
     text-align:center;
     font-family:var(--font-body);
@@ -906,6 +970,10 @@
   /* Cards and rules were drawn for light-on-dark. */
   .daylight .svc,
   .daylight .contact-card{border-color:rgba(47,102,189,0.28); background:rgba(255,255,255,0.9)}
+  /* Must follow the rule above: same specificity, and the white card background
+     was winning and leaving white text on white. */
+  .daylight .contact-card--line{background:#06C755; border-color:#06C755}
+  .daylight a.contact-card--line:hover{background:#05b04c; border-color:#05b04c}
   .daylight .svc__btn:hover,
   .daylight .svc__btn:focus-visible{background:rgba(47,102,189,0.1)}
   .daylight .service-group__name,
@@ -918,6 +986,7 @@
   .daylight .svc__mark::before,
   .daylight .svc__mark::after{background:var(--pale)}
   .daylight .svc[open] .svc__mark::before{background:#fff}
+  .daylight .promise li{background:rgba(31,78,150,0.08); border-color:rgba(31,78,150,0.25)}
   .daylight .svc-tab{background:rgba(255,255,255,0.75); border-color:rgba(31,78,150,0.35)}
   /* Without this the daylight rule above outranks the selected state and the
      active tab turns white-on-white. */
@@ -1181,41 +1250,54 @@
 
     <div id="panel-clean" role="tabpanel" aria-labelledby="tab-clean">
       <div class="service-group">
-      <div class="service-group__head">
-        <span class="service-group__label">清掃部門</span>
-        <h3 class="service-group__name">Re：Life Works<small>飲食店・施設の清掃とメンテナンス</small></h3>
+        <div class="service-group__head">
+          <span class="service-group__label">清掃部門</span>
+          <h3 class="service-group__name">Re:Life Works<small>リライフワークス ／ 店舗・オフィス・ご家庭の清掃</small></h3>
+        </div>
+
+        <ul class="promise">
+          <li><strong>24時間対応</strong>深夜・早朝でもOK</li>
+          <li><strong>見積無料</strong>現地調査も対応</li>
+          <li><strong>年中無休</strong>即日対応します</li>
+          <li><strong>安心のプロ施工</strong>店舗・オフィス・ご家庭</li>
+        </ul>
+
+        <details class="svc">
+          <summary class="svc__btn">グリストラップ清掃<span class="svc__price">税込 22,000円〜25,000円</span><span class="svc__mark"></span></summary>
+          <p class="svc__body">飲食店のグリストラップを徹底洗浄。悪臭・害虫の発生を防ぎ、衛生的な環境を保ちます。施工前後は下の「実績」でご覧いただけます。</p>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__btn">配管詰まり清掃<span class="svc__price">税込 12,000円</span><span class="svc__mark"></span></summary>
+          <p class="svc__body">厨房・トイレ・洗面などの配管の詰まりを、専用機材でスムーズに解消します。</p>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__btn">床清掃<span class="svc__price">税込 33,000円〜44,000円</span><span class="svc__mark"></span></summary>
+          <p class="svc__body">店舗・オフィス・ご家庭の床を、専用洗剤・機材でしっかり洗浄。頑固な汚れもお任せください。</p>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__btn">カーペットシャンプー<span class="svc__price">税込 30,000円〜40,000円</span><span class="svc__mark"></span></summary>
+          <p class="svc__body">カーペットのシミ・汚れ・ニオイを専用機材で丸洗いし、見違えるほどきれいに。</p>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__btn">ワックスがけ<span class="svc__price">税込 11,000円</span><span class="svc__mark"></span></summary>
+          <p class="svc__body">床清掃のオプションです。床にツヤを出し、美観を保ちます。店舗・オフィス・ご家庭どこでも対応します。</p>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__btn">エアコン清掃<span class="svc__price">家庭用 税込 12,000円 ／ 業務用 税込 22,000円</span><span class="svc__mark"></span></summary>
+          <p class="svc__body">内部のカビ・ホコリを徹底洗浄し、空気をきれいに。電気代の節約や、嫌なニオイの改善にもつながります。</p>
+        </details>
+
+        <p class="svc-also">
+          このほか <strong>ハウスクリーニング</strong>・<strong>遺品整理</strong>・<strong>ゴミ屋敷清掃</strong>・
+          空調清掃・害虫駆除・高圧洗浄・定期メンテナンスも承ります。
+          料金は内容によりますので、まずはお問い合わせください。
+        </p>
       </div>
-
-      <details class="svc">
-        <summary class="svc__btn">空調清掃<span class="svc__mark"></span></summary>
-        <p class="svc__body">業務用エアコン・ダクト・換気設備の内部を洗浄します。内部にホコリやカビが溜まると、空調の効きが落ち、臭いの原因にもなります。</p>
-      </details>
-
-      <details class="svc">
-        <summary class="svc__btn">害虫駆除<span class="svc__mark"></span></summary>
-        <p class="svc__body">ゴキブリ・ネズミなどの駆除と、再発を防ぐ処置を行います。飲食店の衛生管理に直結する作業です。</p>
-      </details>
-
-      <details class="svc">
-        <summary class="svc__btn">グリストラップ清掃<span class="svc__mark"></span></summary>
-        <p class="svc__body">厨房排水に溜まる油脂と汚泥を除去します。放置すると悪臭や排水の詰まりにつながります。実績は下のビフォーアフターでご覧いただけます。</p>
-      </details>
-
-      <details class="svc">
-        <summary class="svc__btn">高圧洗浄<span class="svc__mark"></span></summary>
-        <p class="svc__body">高圧の水流で、床・外壁・排水管などにこびり付いた汚れを落とします。手作業では届かない汚れに対応します。</p>
-      </details>
-
-      <details class="svc">
-        <summary class="svc__btn">エアコン分解洗浄<span class="svc__mark"></span></summary>
-        <p class="svc__body">エアコンを分解し、通常の清掃では届かない内部まで洗浄します。カビや臭いの発生源に直接対処します。</p>
-      </details>
-
-      <details class="svc">
-        <summary class="svc__btn">メンテナンス<span class="svc__mark"></span></summary>
-        <p class="svc__body">定期的な清掃と点検を継続して承ります。汚れが溜まりきる前に手を入れることで、一回あたりの負担を抑えられます。</p>
-      </details>
-    </div>
     </div>
 
     <div id="panel-industry" role="tabpanel" aria-labelledby="tab-industry">
@@ -1291,6 +1373,11 @@
         <span class="contact-card__label">MAIL</span>
         <span class="contact-card__value">earth67@outlook.jp</span>
         <span class="contact-card__note">お見積りのご依頼はこちら</span>
+      </a>
+      <a class="contact-card contact-card--line" href="https://lin.ee/9ytFn1m" target="_blank" rel="noopener">
+        <span class="contact-card__label">LINE</span>
+        <span class="contact-card__value">LINEで相談</span>
+        <span class="contact-card__note">24時間受付・見積無料</span>
       </a>
       <div class="contact-card">
         <span class="contact-card__label">FAX</span>
@@ -1382,15 +1469,41 @@
   // kind mobile browsers will autoplay.
   let soundOn = false;
 
-  // Only two clips are ever in flight: the one playing and the one after it.
-  // Letting all eight fetch at once splits the connection eight ways and the
-  // visible clip is the one that runs dry.
-  function preloadNext(idx) {
-    const next = slides[(idx + 1) % total].querySelector('video');
-    if (!next || next.dataset.warmed) return;
-    next.dataset.warmed = '1';
-    next.preload = 'auto';
-    next.load();
+  // Fetch the clips one at a time, in play order, each starting when the one
+  // before it has buffered. Eight at once starves whichever is on screen;
+  // one-ahead-on-demand arrives too late on a slow line. This keeps a single
+  // spare download running and steadily gets further ahead of the playhead.
+  let warming = 1;
+  function warmNext() {
+    if (warming >= total) return;
+    const vid = slides[warming].querySelector('video');
+    warming++;
+    if (!vid) return warmNext();
+    if (vid.dataset.warmed) return warmNext();
+    vid.dataset.warmed = '1';
+    vid.preload = 'auto';
+    let moved = false;
+    const step = () => {
+      if (moved) return;
+      moved = true;
+      clearTimeout(cap);
+      ['canplaythrough','loadeddata','error'].forEach(e => vid.removeEventListener(e, step));
+      setTimeout(warmNext, 150);
+    };
+    // canplaythrough does not always arrive; the cap keeps the queue moving.
+    const cap = setTimeout(step, 12000);
+    ['canplaythrough','loadeddata','error'].forEach(e => vid.addEventListener(e, step));
+    vid.load();
+  }
+
+  function startClip(vid) {
+    if (!vid) return;
+    vid.preload = 'auto';
+    vid.dataset.warmed = '1';
+    try { vid.currentTime = 0; } catch (e) {}
+    vid.muted = !soundOn;
+    const p = vid.play();
+    if (p) p.catch(()=>{});
   }
 
   // Play active video
@@ -1398,19 +1511,21 @@
     slides.forEach((s, i) => {
       const vid = s.querySelector('video');
       if (!vid) return;
-      if (i === idx) {
-        vid.preload = 'auto';
-        try { vid.currentTime = 0; } catch (e) {}
-        vid.muted = !soundOn;
-        const p = vid.play();
-        if (p) p.catch(()=>{});
-      } else {
-        vid.pause();
-      }
+      if (i === idx) startClip(vid);
+      else vid.pause();
     });
-    preloadNext(idx);
   }
   manageMedia(0);
+  // Start filling the queue once the opening clip has something to show, so it
+  // is not competing for the connection while it is the only thing on screen.
+  (function () {
+    const first = slides[0].querySelector('video');
+    if (!first) return warmNext();
+    if (first.readyState >= 3) return warmNext();
+    const go = () => { first.removeEventListener('canplay', go); warmNext(); };
+    first.addEventListener('canplay', go);
+    setTimeout(go, 4000);
+  })();
 
   // Force autoplay on first interaction (mobile requirement)
   document.addEventListener('touchstart', function initVideos() {
@@ -1455,6 +1570,12 @@
     handingOver = true;
     clearTimeout(watchdog);
 
+    // Roll the next clip now, while the outgoing one is still on screen. By the
+    // time the crossfade reveals it, it is already moving instead of decoding
+    // its first frame in front of the visitor.
+    const nextIdx = (current + 1) % total;
+    startClip(slides[nextIdx].querySelector('video'));
+
     // Text out
     tagline.classList.remove('visible');
     tagline.classList.add('exit');
@@ -1466,7 +1587,11 @@
       slides[current].classList.remove('active');
       current = (current + 1) % total;
       slides[current].classList.add('active');
-      manageMedia(current);
+      // The incoming clip is already running; this only stops the others.
+      slides.forEach((s, i) => {
+        const v = s.querySelector('video');
+        if (v && i !== current) v.pause();
+      });
       updateBar();
 
       // Text in
