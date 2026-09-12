@@ -122,6 +122,9 @@
     border-bottom:1px solid rgba(31,78,150,0.18);
   }
   .nav__brand{
+    display:flex;
+    align-items:center;
+    gap:0.7rem;
     font-family:var(--font-display);
     font-size:1.45rem;
     font-weight:700;
@@ -131,7 +134,14 @@
     text-decoration:none;
     line-height:1.15;
   }
-  .nav__brand span{
+  .nav__mark{
+    width:auto;
+    height:2.5rem;
+    flex:none;
+  }
+  .nav__brand-text{display:block}
+  .nav__brand span span,
+  .nav__brand-text span{
     display:block;
     font-family:var(--font-body);
     font-size:0.72rem;
@@ -645,6 +655,43 @@
 
   /* The four promises from the flyer: the reasons to call rather than the
      services themselves, so they sit above the list. */
+  /* The Re:Life Works mark is silver and white on black, so it keeps its own
+     dark ground rather than being dropped onto a white panel. */
+  .brand-band{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+    flex-wrap:wrap;
+    background:#07090f;
+    border-radius:8px;
+    padding:1.8rem 2rem;
+    margin-bottom:1.8rem;
+  }
+  .brand-band__logo{
+    width:260px;
+    height:auto;
+    flex:none;
+    border-radius:4px;
+  }
+  .brand-band__lead{
+    flex:1 1 260px;
+    font-family:var(--font-body);
+    font-size:0.95rem;
+    font-weight:500;
+    line-height:2;
+    letter-spacing:0.04em;
+    color:#dbe6f5;
+  }
+  .brand-band__lead .service-group__label{
+    display:inline-block;
+    margin-bottom:0.7rem;
+  }
+  @media(max-width:620px){
+    .brand-band{flex-direction:column; align-items:stretch; gap:1.2rem; padding:1.4rem}
+    .brand-band__logo{width:100%; max-width:320px; margin:0 auto}
+    .brand-band__lead{text-align:center}
+  }
+
   .promise{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
@@ -871,6 +918,11 @@
     padding:2.5rem 2rem 3rem;
     text-align:center;
   }
+  .site-foot__logo{
+    width:auto;
+    height:5.5rem;
+    margin-bottom:1.2rem;
+  }
   .site-foot__name{
     font-family:var(--font-display);
     font-size:0.95rem;
@@ -1056,8 +1108,10 @@
 
 <nav class="nav">
   <a href="#" class="nav__brand">
-    EARTHIA
-    <span>株式会社EARTHIA工業</span>
+    <img class="nav__mark" src="images/mark-earthia.png" alt="" width="300" height="224">
+    <span class="nav__brand-text">EARTHIA
+      <span>株式会社EARTHIA工業</span>
+    </span>
   </a>
   <ul class="nav__menu">
     <li><a href="#about">About</a></li>
@@ -1250,9 +1304,15 @@
 
     <div id="panel-clean" role="tabpanel" aria-labelledby="tab-clean">
       <div class="service-group">
-        <div class="service-group__head">
-          <span class="service-group__label">清掃部門</span>
-          <h3 class="service-group__name">Re:Life Works<small>リライフワークス ／ 店舗・オフィス・ご家庭の清掃</small></h3>
+        <div class="brand-band">
+          <img class="brand-band__logo" src="images/logo-relifeworks.jpg"
+               alt="Re:Life Works Inc. — 人生を、整える。 遺品整理 / ゴミ屋敷清掃 / ハウスクリーニング"
+               width="900" height="733" loading="lazy">
+          <p class="brand-band__lead">
+            <span class="service-group__label">清掃部門</span>
+            店舗・オフィス・ご家庭の清掃。<br>
+            見積無料・24時間対応で、福井・北陸どこへでも伺います。
+          </p>
         </div>
 
         <ul class="promise">
@@ -1392,6 +1452,8 @@
 </section>
 
 <footer class="site-foot">
+  <img class="site-foot__logo" src="images/logo-earthia.png"
+       alt="株式会社EARTHIA工業" width="760" height="760" loading="lazy">
   <p class="site-foot__name">EARTHIA INDUSTRIES CO., LTD.</p>
   <p class="site-foot__jp">株式会社EARTHIA工業</p>
 

@@ -7,7 +7,10 @@
 
 ```
 index.html            サイト本体（HTML / CSS / JS を1ファイルに同梱）
-images/               ビフォーアフター写真（ba1–6）
+images/               ビフォーアフター写真（ba1–6）とロゴ
+                      mark-earthia.png      ナビのシンボル（白を透過）
+                      logo-earthia.png      フッターのロゴ（白を透過）
+                      logo-relifeworks.jpg  Re:Life Works（黒地のまま）
 favicon.svg           E モノグラムのファビコン
 apple-touch-icon.png  iOS ホーム画面用（180px、SVG 非対応のため別途）
 vercel.json           静的配信の指定（フレームワークなし・ルートを配信）
@@ -61,6 +64,14 @@ vercel.json           静的配信の指定（フレームワークなし・ル�
 `#soundBtn` `.koesa-sig` `#progressBar` はヒーローの付属物なので、ヒーロー内に
 `position:absolute` で置いています。`fixed` にすると明るいセクションの上に薄い色のまま
 浮いてしまい、読めなくなります。
+
+## ロゴ
+
+EARTHIA工業のロゴは白背景を抜いた PNG です。ナビは水色、フッターは白地なので、
+白のまま置くと四角い箱が浮きます。
+
+Re:Life Works のロゴは銀と白の字で黒地に描かれているため、**明るいパネルには直接置けません**。
+`.brand-band` という濃色の帯を用意し、その上に載せています。
 
 ## 実装メモ
 
