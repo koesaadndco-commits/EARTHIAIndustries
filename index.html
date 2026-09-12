@@ -20,6 +20,9 @@
     --pale:    #d4e0f0;
     --glow:    #4a7cc9;
     --white:   #e8ecf4;
+    /* Hero clips are graded dark at the source. Raise this to lift them;
+       1 is the untouched footage. Stills are already graded and untouched. */
+    --video-lift: 1.28;
     --font-display: 'Space Grotesk', sans-serif;
     --font-body:    'Noto Sans JP', 'Space Grotesk', sans-serif;
   }
@@ -86,6 +89,9 @@
     width:100%;
     height:100%;
     object-fit:cover;
+    /* brightness() scales, so blacks stay black and only mid-tones open up;
+       the saturation nudge keeps the lift from washing the blues out */
+    filter:brightness(var(--video-lift)) saturate(1.06);
   }
 
   /* Image fills with Ken Burns */
