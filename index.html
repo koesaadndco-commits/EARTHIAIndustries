@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
@@ -23,8 +23,23 @@
     /* Hero clips are graded dark at the source. Raise this to lift them;
        1 is the untouched footage. Stills are already graded and untouched. */
     --video-lift: 1.28;
+    /* Gold. Four stops rather than one flat colour: a single gold reads as
+       mustard, and it is the light-to-dark run across a surface that makes it
+       look like metal. */
+    --gold-lit:  #fffaf0;
+    --gold-pale: #f6e8c4;
+    --gold-mid:  #e9d49b;
+    --gold-deep: #dcc07f;
+    --gold-edge: #b8942f;
+    --gold-ink:  #2b3c5c;
     --font-display: 'Space Grotesk', sans-serif;
     --font-body:    'Noto Sans JP', 'Space Grotesk', sans-serif;
+    /* Never let this fall through to generic `cursive`: on Windows that is
+       Comic Sans, which would sign the work in the worst hand available.
+       The named fallbacks are real script faces that ship with macOS and
+       Windows respectively. */
+    --font-script:  'Great Vibes', 'Snell Roundhand', 'Apple Chancery',
+                    'Segoe Script', 'Brush Script MT', cursive;
   }
 
   html,body{
@@ -114,12 +129,37 @@
     justify-content:space-between;
     align-items:center;
     gap:1.5rem;
-    padding:1.3rem 2.5rem;
-    /* A light sky-blue bar, to sit with the daylight page below rather than
-       against it. It stays opaque the whole way down: fading out would leave
+    padding:1.15rem 2.5rem;
+    /* Brushed gold. It stays opaque the whole way down: fading out would leave
        the buttons' dark text floating over whatever the clip is showing. */
-    background:linear-gradient(180deg, rgba(216,235,251,0.97) 0%, rgba(197,224,246,0.92) 100%);
-    border-bottom:1px solid rgba(31,78,150,0.18);
+    background:linear-gradient(180deg,
+      var(--gold-lit)  0%,
+      var(--gold-pale) 38%,
+      var(--gold-mid)  72%,
+      var(--gold-deep) 100%);
+    box-shadow:0 2px 18px rgba(92,68,18,0.18);
+  }
+  /* A sheen along the top and a struck edge along the bottom. Two hairlines are
+     what separate gold leaf from a yellow rectangle. */
+  .nav::before,
+  .nav::after{
+    content:'';
+    position:absolute;
+    left:0; right:0;
+    pointer-events:none;
+  }
+  .nav::before{
+    top:0; height:1px;
+    background:rgba(255,255,255,0.9);
+  }
+  .nav::after{
+    bottom:0; height:2px;
+    background:linear-gradient(90deg,
+      rgba(184,148,47,0) 0%,
+      var(--gold-edge) 16%,
+      #f7e8b8 50%,
+      var(--gold-edge) 84%,
+      rgba(184,148,47,0) 100%);
   }
   .nav__brand{
     display:flex;
@@ -147,7 +187,7 @@
     font-size:0.72rem;
     font-weight:700;
     letter-spacing:0.18em;
-    color:#3a5580;
+    color:var(--gold-ink);
     opacity:1;
     margin-top:0.3rem;
     text-transform:none;
@@ -168,17 +208,22 @@
     color:#13223e;
     text-decoration:none;
     padding:0.55rem 1.05rem;
-    border:1px solid rgba(31,78,150,0.35);
+    border:1px solid rgba(142,108,34,0.45);
     border-radius:999px;
-    background:rgba(255,255,255,0.78);
+    background:linear-gradient(180deg, rgba(255,255,255,0.74), rgba(255,255,255,0.34));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.75);
     white-space:nowrap;
     transition:background 0.25s, border-color 0.25s, color 0.25s;
   }
+  /* Navy fill with the gold read back out of it, rather than a plain blue
+     button dropped onto the gold. */
   .nav__menu a:hover,
-  .nav__menu a:focus-visible{
-    background:#1f4e96;
-    border-color:#1f4e96;
-    color:#fff;
+  .nav__menu a:focus-visible,
+  .nav__menu a[aria-current="page"]{
+    background:#13223e;
+    border-color:#13223e;
+    color:var(--gold-mid);
+    box-shadow:none;
   }
 
   /* ─── Hero text ─── */
@@ -321,15 +366,46 @@
     bottom:2.5rem;
     left:3rem;
     z-index:100;
-    font-family:var(--font-display);
-    font-size:0.5rem;
-    letter-spacing:0.3em;
-    color:var(--ice);
-    opacity:0.2;
+    display:flex;
+    align-items:center;
+    gap:0.55rem;
     text-decoration:none;
+    opacity:0.62;
     transition:opacity 0.4s;
   }
-  .koesa-sig:hover{opacity:0.5}
+  .koesa-sig:hover,
+  .koesa-sig:focus-visible{opacity:1}
+  .koesa-sig__mark{
+    width:1.55rem;
+    height:1.55rem;
+    flex:none;
+    /* Strokes are set to currentColor so the mark and the script below it are
+       the one piece of gold, not two that nearly match. */
+    color:var(--gold-mid);
+  }
+  .koesa-sig__txt{display:block; line-height:1}
+  .koesa-sig__by{
+    display:block;
+    font-family:var(--font-display);
+    font-size:0.44rem;
+    font-weight:500;
+    letter-spacing:0.34em;
+    text-transform:uppercase;
+    color:var(--gold-pale);
+    opacity:0.8;
+  }
+  .koesa-sig__name{
+    display:block;
+    font-family:var(--font-script);
+    /* Great Vibes sits small for its point size and its descenders run long,
+       so it is set larger than the line around it and given room underneath. */
+    font-size:1.4rem;
+    line-height:1.15;
+    color:var(--gold-mid);
+    letter-spacing:0.02em;
+    margin-top:0.1rem;
+    text-shadow:0 1px 6px rgba(0,0,0,0.45);
+  }
 
   /* ─── BELOW FOLD ─── */
   .intro{
@@ -1288,8 +1364,14 @@
     /* All five have to sit on one line: wrapping left お問い合わせ stranded on a
        row of its own, which read as the bar being crooked. */
     .nav__menu{
-      justify-content:center;
-      gap:0.3rem;
+      /* `safe center` centres the row while it fits and falls back to
+         flex-start the moment it does not. Plain `center` on an overflowing
+         flex row pushes the first item off the scrollable area entirely --
+         with six entries on a 390px phone, About became unreachable. The
+         flex-start above it is the fallback where `safe` is not understood. */
+      justify-content:flex-start;
+      justify-content:safe center;
+      gap:0.26rem;
       flex-wrap:nowrap;
       /* last resort on very narrow phones: slide rather than clip */
       overflow-x:auto;
@@ -1298,8 +1380,8 @@
     }
     .nav__menu::-webkit-scrollbar{display:none}
     .nav__menu a{
-      font-size:0.68rem;
-      padding:0.38rem 0.58rem;
+      font-size:0.64rem;
+      padding:0.34rem 0.5rem;
       letter-spacing:0;
     }
   }
@@ -1415,7 +1497,23 @@
     Sound On
   </button>
   
-  <a href="#" class="koesa-sig">Designed by KOESA Co., Ltd.</a>
+  <a href="#" class="koesa-sig" aria-label="Designed by KOESA Co., Ltd.">
+    <svg class="koesa-sig__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"
+         stroke="currentColor" stroke-width="1.6"
+         stroke-linecap="round" stroke-linejoin="round">
+      <rect x="6.2" y="9.5" width="19.6" height="16.4" rx="5.4"/>
+      <path d="M16 9.5V5.4"/>
+      <circle cx="16" cy="3.9" r="1.7" fill="currentColor" stroke="none"/>
+      <path d="M3.2 15.4h3M25.8 15.4h3M3.2 20h3M25.8 20h3"/>
+      <circle cx="12.1" cy="16.4" r="1.75" fill="currentColor" stroke="none"/>
+      <circle cx="19.9" cy="16.4" r="1.75" fill="currentColor" stroke="none"/>
+      <path d="M12.3 20.7c1.1 1.5 2.3 2.2 3.7 2.2s2.6-.7 3.7-2.2"/>
+    </svg>
+    <span class="koesa-sig__txt">
+      <span class="koesa-sig__by">Designed by</span>
+      <span class="koesa-sig__name">Koesa</span>
+    </span>
+  </a>
 
   <p class="ai-note">
     ※ この映像はAIで生成したイメージビデオです。<br>
@@ -1673,10 +1771,6 @@
           <th>FAX</th>
           <td>0776-76-2352</td>
         </tr>
-        <tr>
-          <th>メール</th>
-          <td><a href="mailto:earth67@outlook.jp" style="color:inherit">earth67@outlook.jp</a></td>
-        </tr>
       </tbody>
     </table>
   </div>
@@ -1709,11 +1803,6 @@
         <span class="contact-card__label">TEL</span>
         <span class="contact-card__value">090-3290-0005</span>
         <span class="contact-card__note">タップで発信できます</span>
-      </a>
-      <a class="contact-card" href="mailto:earth67@outlook.jp">
-        <span class="contact-card__label">MAIL</span>
-        <span class="contact-card__value">earth67@outlook.jp</span>
-        <span class="contact-card__note">お見積りのご依頼はこちら</span>
       </a>
       <a class="contact-card contact-card--line" href="https://lin.ee/9ytFn1m" target="_blank" rel="noopener">
         <span class="contact-card__label">LINE</span>
