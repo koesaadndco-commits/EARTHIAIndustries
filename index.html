@@ -228,8 +228,10 @@
   }
 
   /* ─── Sound toggle ─── */
+  /* These belong to the film, not the page: left fixed they floated over the
+     daylight sections, where pale-on-white is unreadable. */
   .sound-toggle{
-    position:fixed;
+    position:absolute;
     bottom:2.5rem;
     right:3rem;
     z-index:100;
@@ -271,7 +273,7 @@
 
   /* Progress bar (cinematic: thin line, not dots) */
   .progress-bar{
-    position:fixed;
+    position:absolute;
     bottom:0;
     left:0;
     height:2px;
@@ -303,7 +305,7 @@
   }
 
   .koesa-sig{
-    position:fixed;
+    position:absolute;
     bottom:2.5rem;
     left:3rem;
     z-index:100;
@@ -851,6 +853,88 @@
     .company-table th{border-bottom:none;padding-bottom:0.2rem}
   }
 
+  /* ═══ DAYLIGHT — everything below the hero ═══
+     The film is a bright-daylight piece now, and the page under it was still
+     the old dark brochure. The sections keep their rules; only the palette
+     behind them is flipped. */
+  .daylight{
+    --deep:  #eef3fb;
+    --navy:  #ffffff;
+    --slate: #ffffff;
+    --ice:   #40567b;
+    --pale:  #13223e;
+    --white: #22304c;
+    --glow:  #1f4e96;
+    position:relative;
+  }
+
+  /* The hero has to sit above the fixed sky that follows it in the document. */
+  .hero{z-index:1}
+
+  .sky{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    /* The gradient is the floor: if the photograph is slow or never arrives,
+       this is still a clear sky rather than a white void. */
+    background:
+      linear-gradient(180deg, rgba(238,243,251,0.30) 0%, rgba(238,243,251,0.55) 70%, rgba(238,243,251,0.75) 100%),
+      url('https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_070641_07ec4048-cbd0-4505-b6bf-7081b227866d.png') center 20%/cover no-repeat,
+      linear-gradient(180deg, #8fbfec 0%, #bcdcf6 48%, #e8f1fb 100%);
+  }
+  /* Sections paint over the sky; without this they slide under it. */
+  .daylight > section,
+  .daylight > footer{position:relative; z-index:1}
+
+  /* The statement is where the sky is meant to be felt, so it stays sheer. */
+  .daylight .intro{background:transparent}
+  .daylight .intro__heading,
+  .daylight .intro__tagline{text-shadow:0 1px 12px rgba(255,255,255,0.85)}
+  /* 0.5 opacity was set for pale type on near-black; on the sky it disappears. */
+  .daylight .intro__tagline{opacity:1; color:var(--glow)}
+  .daylight .intro__eyebrow{color:var(--glow)}
+
+  /* Content-dense sections sit on frosted panels so the text stays legible. */
+  .daylight .ba-section{background:rgba(255,255,255,0.84)}
+  .daylight .panel{background:rgba(255,255,255,0.82)}
+  .daylight .panel--alt{background:rgba(255,255,255,0.9)}
+  .daylight .site-foot{background:rgba(255,255,255,0.92); border-top-color:rgba(19,34,62,0.14)}
+
+  /* Cards and rules were drawn for light-on-dark. */
+  .daylight .svc,
+  .daylight .contact-card{border-color:rgba(47,102,189,0.28); background:rgba(255,255,255,0.9)}
+  .daylight .svc__btn:hover,
+  .daylight .svc__btn:focus-visible{background:rgba(47,102,189,0.1)}
+  .daylight .service-group__name,
+  .daylight .svc__btn{color:var(--pale)}
+  .daylight .service-group__head{border-bottom-color:rgba(47,102,189,0.35)}
+  .daylight .service-list{background:rgba(47,102,189,0.2); border-color:rgba(47,102,189,0.2)}
+  .daylight .service-list li,
+  .daylight .panel--alt .service-list li{background:rgba(255,255,255,0.94)}
+  .daylight .svc__mark{border-color:rgba(19,34,62,0.4)}
+  .daylight .svc__mark::before,
+  .daylight .svc__mark::after{background:var(--pale)}
+  .daylight .svc[open] .svc__mark::before{background:#fff}
+  .daylight .svc-tab{background:rgba(255,255,255,0.75); border-color:rgba(31,78,150,0.35)}
+  /* Without this the daylight rule above outranks the selected state and the
+     active tab turns white-on-white. */
+  .daylight .svc-tab[aria-selected="true"]{background:var(--glow); border-color:var(--glow); color:#fff}
+  .daylight .company-table th,
+  .daylight .company-table td{border-bottom-color:rgba(19,34,62,0.16)}
+
+  /* The before/after photographs were graded down to sit on near-black. On a
+     white panel that grade just reads as dirty, so it is eased back. */
+  .daylight .ba-img{filter:saturate(0.62) brightness(1) contrast(1.05)}
+  .daylight .ba-before{filter:saturate(0.5) brightness(0.92) contrast(1.05)}
+  .daylight .ba-slider{border-color:rgba(47,102,189,0.25)}
+  .daylight .ba-slider::before{
+    background:linear-gradient(180deg, rgba(19,34,62,0.05) 0%, rgba(19,34,62,0.14) 100%);
+  }
+  .daylight .ba-handle,
+  .daylight .ba-handle__line{background:#fff}
+
+
   @media(max-width:768px){
     /* The menu used to be hidden here, which left phone visitors with no way
        to reach any section but by scrolling the whole page. */
@@ -886,6 +970,13 @@
     .ai-note{left:1.5rem;bottom:3.4rem;right:1.5rem;font-size:0.6rem}
     .scroll-hint{bottom:8vh}
     .hero__letterbox-top,.hero__letterbox-bot{height:4vh}
+
+    .sky{
+      background:
+        linear-gradient(180deg, rgba(238,243,251,0.28) 0%, rgba(238,243,251,0.55) 70%, rgba(238,243,251,0.78) 100%),
+        url('https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_070641_288da369-373f-46be-9027-b3ed84219e8c.png') center 25%/cover no-repeat,
+        linear-gradient(180deg, #8fbfec 0%, #bcdcf6 48%, #e8f1fb 100%);
+    }
 
   }
 </style>
@@ -970,20 +1061,24 @@
     <div class="scroll-hint__line"></div>
   </div>
 
+<div class="progress-bar" id="progressBar"></div>
+  
+  <button class="sound-toggle" id="soundBtn">
+    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 8.5v7a4.49 4.49 0 002.5-3.5zM14 3.23v2.06a6.51 6.51 0 010 13.42v2.06A8.51 8.51 0 0014 3.23z"/></svg>
+    Sound On
+  </button>
+  
+  <a href="#" class="koesa-sig">Designed by KOESA Co., Ltd.</a>
+
   <p class="ai-note">
     ※ この映像はAIで生成したイメージビデオです。<br>
     　 登場する人物・店舗・作業風景はフィクションです。
   </p>
 </section>
 
-<div class="progress-bar" id="progressBar"></div>
 
-<button class="sound-toggle" id="soundBtn">
-  <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 8.5v7a4.49 4.49 0 002.5-3.5zM14 3.23v2.06a6.51 6.51 0 010 13.42v2.06A8.51 8.51 0 0014 3.23z"/></svg>
-  Sound On
-</button>
-
-<a href="#" class="koesa-sig">Designed by KOESA Co., Ltd.</a>
+<div class="daylight">
+<div class="sky" aria-hidden="true"></div>
 
 <section class="intro" id="about">
   <p class="intro__eyebrow">PROFESSIONAL WORK, FAIR PRICE</p>
@@ -1221,6 +1316,7 @@
 
   <p class="site-foot__copy">&copy; EARTHIA INDUSTRIES CO., LTD.</p>
 </footer>
+</div><!-- /.daylight -->
 
 <script>
   const slides  = document.querySelectorAll('.hero__slide');
