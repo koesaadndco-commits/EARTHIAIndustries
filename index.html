@@ -94,47 +94,6 @@
     filter:brightness(var(--video-lift)) saturate(1.06);
   }
 
-  /* Image fills with Ken Burns */
-  /* Ambient backdrop, revealed only when the still is letterboxed (see mobile) */
-  .hero__slide .kb-fill{
-    position:absolute;
-    inset:0;
-    background-size:cover;
-    background-position:center;
-    display:none;
-  }
-  .hero__slide .kb{
-    position:absolute;
-    inset:-10%;
-    width:120%;
-    height:120%;
-    background-size:cover;
-    background-position:center;
-    will-change:transform;
-  }
-  .hero__slide.active .kb{
-    animation:kenBurns 8s ease-in-out forwards;
-  }
-  @keyframes kenBurns{
-    0%{transform:scale(1) translate(0,0)}
-    100%{transform:scale(1.08) translate(-1%,-0.5%)}
-  }
-  /* Alternate Ken Burns directions */
-  .hero__slide.kb-right.active .kb{
-    animation:kenBurnsR 8s ease-in-out forwards;
-  }
-  @keyframes kenBurnsR{
-    0%{transform:scale(1.06) translate(-1%,0)}
-    100%{transform:scale(1) translate(1%,0.5%)}
-  }
-  .hero__slide.kb-up.active .kb{
-    animation:kenBurnsU 8s ease-in-out forwards;
-  }
-  @keyframes kenBurnsU{
-    0%{transform:scale(1) translate(0,1%)}
-    100%{transform:scale(1.06) translate(0,-1%)}
-  }
-
   /* Film grain overlay */
   .hero__grain{
     position:absolute;
@@ -504,28 +463,6 @@
     .scroll-hint{bottom:8vh}
     .hero__letterbox-top,.hero__letterbox-bot{height:4vh}
 
-    /* The stills are 16:9 with "CLEAN CULTURE" burned in. Cropping them to a
-       portrait viewport eats the type, so show the frame whole and fill the
-       surrounding space with a blurred copy rather than black. */
-    .hero__slide .kb{
-      inset:0;
-      width:100%;
-      height:100%;
-      background-size:contain;
-      background-repeat:no-repeat;
-      background-position:center;
-    }
-    .hero__slide .kb-fill{
-      display:block;
-      filter:blur(24px) saturate(0.7) brightness(0.4);
-      transform:scale(1.2);
-    }
-    /* Ken Burns would zoom straight back into the crop we just avoided */
-    .hero__slide.active .kb,
-    .hero__slide.kb-right.active .kb,
-    .hero__slide.kb-up.active .kb{
-      animation:none;
-    }
   }
 </style>
 </head>
@@ -534,7 +471,7 @@
 <nav class="nav">
   <a href="#" class="nav__brand">
     EARTHIA
-    <span>Industries Co., Ltd.</span>
+    <span>株式会社EARTHIA工業</span>
   </a>
   <ul class="nav__menu">
     <li><a href="#about">About</a></li>
@@ -548,54 +485,52 @@
   <div class="hero__letterbox-top"></div>
   <div class="hero__letterbox-bot"></div>
 
-  <!-- 1: 画像 路地裏 夜明け -->
-  <div class="hero__slide active">
-    <div class="kb-fill" style="background-image:url('images/slide1.jpg')"></div>
-    <div class="kb" style="background-image:url('images/slide1.jpg')"></div>
-  </div>
-  <!-- 2: 動画 窓を磨く手元 -->
+  <!-- 1 困りごと 店主 -->
   <div class="hero__slide">
     <video muted loop playsinline webkit-playsinline autoplay preload="auto">
-      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260910_022943_8a58aeb6-f454-448b-b8f0-465d52f76f65.mp4" type="video/mp4">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041847_b1dceb35-fc85-4e71-9e39-97f636f8cf3c.mp4" type="video/mp4">
     </video>
   </div>
-  <!-- 3: 画像 夜の都市 -->
-  <div class="hero__slide kb-right">
-    <div class="kb-fill" style="background-image:url('images/slide2.jpg')"></div>
-    <div class="kb" style="background-image:url('images/slide2.jpg')"></div>
-  </div>
-  <!-- 4: 動画 床を磨く手元 -->
+  <!-- 2 出動 チーム登場 -->
   <div class="hero__slide">
     <video muted loop playsinline webkit-playsinline autoplay preload="auto">
-      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260910_121046_cbead7f4-e835-43bb-8f3f-bc87de7e5c13.mp4" type="video/mp4">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_025106_f91209c8-812f-4878-9fcd-e15119e3485b.mp4" type="video/mp4">
     </video>
   </div>
-  <!-- 5: 画像 手元クローズアップ (タイトル焼き込み) -->
-  <div class="hero__slide kb-up">
-    <div class="kb-fill" style="background-image:url('images/slide3.jpg')"></div>
-    <div class="kb" style="background-image:url('images/slide3.jpg')"></div>
-  </div>
-  <!-- 6: 動画 表情 カウンター磨き -->
+  <!-- 3 窓を拭く手元 -->
   <div class="hero__slide">
     <video muted loop playsinline webkit-playsinline autoplay preload="auto">
-      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260910_022935_74b7867e-80c2-4dad-8d9b-cee3b457a111.mp4" type="video/mp4">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_0c5ed526-cf5e-4c3d-9556-c25f44c139ec.mp4" type="video/mp4">
     </video>
   </div>
-  <!-- 7: 画像 横顔シルエット (タイトル焼き込み) -->
-  <div class="hero__slide kb-right">
-    <div class="kb-fill" style="background-image:url('images/slide4.jpg')"></div>
-    <div class="kb" style="background-image:url('images/slide4.jpg')"></div>
-  </div>
-  <!-- 8: 動画 朝の部屋 ラスト -->
+  <!-- 4 厨房 チームワーク -->
   <div class="hero__slide">
     <video muted loop playsinline webkit-playsinline autoplay preload="auto">
-      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260910_022942_f45d66ee-538d-49e5-b06c-6d784490e0ee.mp4" type="video/mp4">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041847_f41d3d03-41d1-4ec3-ab67-a6ec99274b84.mp4" type="video/mp4">
     </video>
   </div>
-  <!-- 9: 動画 チーム集合 ラスト。焼き込みのない素材なので、社名は下のオーバーレイだけが出る -->
+  <!-- 5 グリストラップ -->
   <div class="hero__slide">
     <video muted loop playsinline webkit-playsinline autoplay preload="auto">
-      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260910_122649_481b520b-79b1-41b5-bfcc-458ba5c5102a.mp4" type="video/mp4">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_452d3840-c634-4f30-8f03-ad4e00066f88.mp4" type="video/mp4">
+    </video>
+  </div>
+  <!-- 6 仕上がり -->
+  <div class="hero__slide">
+    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_27f5850e-a93f-417f-8639-2d2e1916dd8d.mp4" type="video/mp4">
+    </video>
+  </div>
+  <!-- 7 店主の笑顔 -->
+  <div class="hero__slide">
+    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_c6732029-2ddd-40ef-8939-e477a4852609.mp4" type="video/mp4">
+    </video>
+  </div>
+  <!-- 8 チーム集合 ラスト -->
+  <div class="hero__slide">
+    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_81ffc495-d9a7-4e84-9f73-85d2f5aaa871.mp4" type="video/mp4">
     </video>
   </div>
 
@@ -716,16 +651,16 @@
   const total   = slides.length;
 
   // Cinema sequence: 9 scenes
+  // 1シーン1メッセージ。焼き込みは廃したので、文字はここだけが出どころ。
   const sequence = [
-    { tag: '',                             sub: '',                                       hide: true  },
-    { tag: '福井・北陸の街を隅々まで',       sub: '私たちにお任せください',                    hide: false },
-    { tag: '',                             sub: '',                                       hide: true  },
-    { tag: '掃除文化が生んだ集団',           sub: 'EARTHIA INDUSTRIES',                     hide: false },
-    { tag: '',                             sub: '',                                       hide: true  },
-    { tag: '掃除文化を未来へ',              sub: '「掃除文化」は、綺麗な未来にする',           hide: false },
-    { tag: '',                             sub: '',                                       hide: true  },
-    { tag: 'CLEAN CULTURE',               sub: '福井・北陸クリーンアップ作戦「掃除文化」',     hide: false },
-    { tag: '清掃に、プロの流儀。',           sub: 'EARTHIA Industries Co., Ltd.',            hide: false },
+    { tag: 'その汚れ、あきらめていませんか。', sub: '',                          hide: false },
+    { tag: '福井・北陸、どこへでも。',        sub: '',                          hide: false },
+    { tag: '一人ひとりが、プロ。',            sub: '',                          hide: false },
+    { tag: 'チームで、速く、確実に。',        sub: '',                          hide: false },
+    { tag: '手が届かない場所こそ、私たちの仕事。', sub: '',                      hide: false },
+    { tag: '高品質を、業界水準より安く。',     sub: '',                          hide: false },
+    { tag: 'また、お願いしたくなる。',        sub: '',                          hide: false },
+    { tag: '清掃に、プロの流儀。',            sub: '株式会社EARTHIA工業',        hide: false },
   ];
 
   let current = 0;
