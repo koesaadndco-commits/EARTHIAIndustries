@@ -524,15 +524,14 @@
     text-align:center;
   }
 
-  /* 事業内容 — 清掃部門と工業部門で仕事の性質が違うので、並べずに分ける */
-  .service-group + .service-group{margin-top:3.5rem}
+  /* 事業内容 — 各サービスは見出しだけでは伝わらないので、押すと中身が開く */
   .service-group__head{
     display:flex;
     align-items:baseline;
     gap:0.9rem;
     flex-wrap:wrap;
-    margin-bottom:1.2rem;
-    padding-bottom:0.9rem;
+    margin-bottom:1.6rem;
+    padding-bottom:1rem;
     border-bottom:1px solid rgba(74,124,201,0.3);
   }
   .service-group__label{
@@ -548,51 +547,82 @@
   }
   .service-group__name{
     font-family:var(--font-display);
-    font-size:clamp(1.25rem, 3vw, 1.7rem);
+    font-size:clamp(1.35rem, 3.2vw, 1.9rem);
     font-weight:700;
-    letter-spacing:0.06em;
+    letter-spacing:0.04em;
     color:#fff;
     margin:0;
   }
   .service-group__name small{
     display:block;
     font-family:var(--font-body);
-    font-size:0.75rem;
+    font-size:0.78rem;
     font-weight:500;
-    letter-spacing:0.12em;
+    letter-spacing:0.1em;
     color:var(--ice);
-    opacity:0.7;
-    margin-top:0.3rem;
+    opacity:0.75;
+    margin-top:0.35rem;
   }
 
-  .service-list{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-    gap:1px;
-    background:rgba(74,124,201,0.18);
-    border:1px solid rgba(74,124,201,0.18);
+  .svc{
+    border:1px solid rgba(74,124,201,0.25);
+    border-radius:6px;
+    overflow:hidden;
+    background:var(--slate);
   }
-  .service-list li{
-    list-style:none;
-    background:var(--deep);
-    padding:1.4rem 1.5rem;
-    font-family:var(--font-body);
-    font-size:0.95rem;
-    font-weight:500;
-    color:var(--white);
-    letter-spacing:0.05em;
+  .svc + .svc{margin-top:0.7rem}
+  .svc__btn{
+    width:100%;
     display:flex;
     align-items:center;
-    gap:0.9rem;
+    justify-content:space-between;
+    gap:1rem;
+    text-align:left;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:1.25rem 1.4rem;
+    font-family:var(--font-body);
+    font-size:1.02rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    color:#fff;
+    transition:background 0.25s;
   }
-  .service-list li::before{
-    content:'';
+  .svc__btn:hover,
+  .svc__btn:focus-visible{background:rgba(74,124,201,0.16)}
+  .svc__mark{
     flex:none;
-    width:6px;
-    height:6px;
+    width:26px;
+    height:26px;
     border-radius:50%;
-    background:var(--glow);
+    border:1px solid rgba(184,204,232,0.45);
+    position:relative;
+    transition:background 0.25s, border-color 0.25s, transform 0.3s;
   }
+  .svc__mark::before,
+  .svc__mark::after{
+    content:'';
+    position:absolute;
+    top:50%; left:50%;
+    background:var(--pale);
+    transform:translate(-50%,-50%);
+  }
+  .svc__mark::before{width:11px;height:2px}
+  .svc__mark::after{width:2px;height:11px;transition:opacity 0.25s}
+  .svc[open] .svc__mark{background:var(--glow);border-color:var(--glow)}
+  .svc[open] .svc__mark::after{opacity:0}
+  .svc__body{
+    padding:0 1.4rem 1.4rem;
+    font-family:var(--font-body);
+    font-size:0.92rem;
+    font-weight:400;
+    line-height:2;
+    letter-spacing:0.04em;
+    color:var(--white);
+    opacity:0.88;
+  }
+  .svc:not([open]) .svc__body{display:none}
 
   /* 会社概要 */
   .company-table{
@@ -871,7 +901,7 @@
 
 <!-- ─── BEFORE / AFTER ─── -->
 <section class="ba-section" id="works">
-  <p class="ba-section__eyebrow">RESULTS &mdash; RELIFEWORKS</p>
+  <p class="ba-section__eyebrow">RESULTS &mdash; Re：Life Works</p>
   <h2 class="ba-section__heading">グリストラップ清掃実績</h2>
   <p class="ba-section__sub">飲食店の衛生管理を支える、プロの仕事。</p>
 
@@ -953,34 +983,38 @@
     <div class="service-group">
       <div class="service-group__head">
         <span class="service-group__label">清掃部門</span>
-        <h3 class="service-group__name">ReLifeWorks<small>飲食店・施設の清掃とメンテナンス</small></h3>
+        <h3 class="service-group__name">Re：Life Works<small>飲食店・施設の清掃とメンテナンス</small></h3>
       </div>
-      <ul class="service-list">
-        <li>空調清掃</li>
-        <li>害虫駆除</li>
-        <li>グリストラップ清掃</li>
-        <li>高圧洗浄</li>
-        <li>エアコン分解洗浄</li>
-        <li>メンテナンス</li>
-      </ul>
-    </div>
 
-    <div class="service-group">
-      <div class="service-group__head">
-        <span class="service-group__label">工業部門</span>
-        <h3 class="service-group__name">株式会社EARTHIA工業<small>土木・建設・プラント・人材</small></h3>
-      </div>
-      <ul class="service-list">
-        <li>土木一式工事</li>
-        <li>板金工事一式</li>
-        <li>建設工事</li>
-        <li>企画／イベント設営・管理</li>
-        <li>請負及びコンサルティング業</li>
-        <li>一般労働者派遣業</li>
-        <li>プラント設備設計</li>
-        <li>制作／販売及び施工並びに保守</li>
-        <li>前各号に付帯する一切の業務</li>
-      </ul>
+      <details class="svc">
+        <summary class="svc__btn">空調清掃<span class="svc__mark"></span></summary>
+        <p class="svc__body">業務用エアコン・ダクト・換気設備の内部を洗浄します。内部にホコリやカビが溜まると、空調の効きが落ち、臭いの原因にもなります。</p>
+      </details>
+
+      <details class="svc">
+        <summary class="svc__btn">害虫駆除<span class="svc__mark"></span></summary>
+        <p class="svc__body">ゴキブリ・ネズミなどの駆除と、再発を防ぐ処置を行います。飲食店の衛生管理に直結する作業です。</p>
+      </details>
+
+      <details class="svc">
+        <summary class="svc__btn">グリストラップ清掃<span class="svc__mark"></span></summary>
+        <p class="svc__body">厨房排水に溜まる油脂と汚泥を除去します。放置すると悪臭や排水の詰まりにつながります。実績は下のビフォーアフターでご覧いただけます。</p>
+      </details>
+
+      <details class="svc">
+        <summary class="svc__btn">高圧洗浄<span class="svc__mark"></span></summary>
+        <p class="svc__body">高圧の水流で、床・外壁・排水管などにこびり付いた汚れを落とします。手作業では届かない汚れに対応します。</p>
+      </details>
+
+      <details class="svc">
+        <summary class="svc__btn">エアコン分解洗浄<span class="svc__mark"></span></summary>
+        <p class="svc__body">エアコンを分解し、通常の清掃では届かない内部まで洗浄します。カビや臭いの発生源に直接対処します。</p>
+      </details>
+
+      <details class="svc">
+        <summary class="svc__btn">メンテナンス<span class="svc__mark"></span></summary>
+        <p class="svc__body">定期的な清掃と点検を継続して承ります。汚れが溜まりきる前に手を入れることで、一回あたりの負担を抑えられます。</p>
+      </details>
     </div>
   </div>
 </section>
