@@ -115,19 +115,21 @@
     align-items:center;
     gap:1.5rem;
     padding:1.3rem 2.5rem;
-    /* the bar sits over bright daylight footage, so it needs its own ground */
-    background:linear-gradient(180deg, rgba(10,14,26,0.92) 0%, rgba(10,14,26,0.72) 60%, rgba(10,14,26,0) 100%);
+    /* A light sky-blue bar, to sit with the daylight page below rather than
+       against it. It stays opaque the whole way down: fading out would leave
+       the buttons' dark text floating over whatever the clip is showing. */
+    background:linear-gradient(180deg, rgba(216,235,251,0.97) 0%, rgba(197,224,246,0.92) 100%);
+    border-bottom:1px solid rgba(31,78,150,0.18);
   }
   .nav__brand{
     font-family:var(--font-display);
     font-size:1.45rem;
     font-weight:700;
     letter-spacing:0.16em;
-    color:#fff;
+    color:#13223e;
     text-transform:uppercase;
     text-decoration:none;
     line-height:1.15;
-    text-shadow:0 2px 10px rgba(0,0,0,0.6);
   }
   .nav__brand span{
     display:block;
@@ -135,8 +137,8 @@
     font-size:0.72rem;
     font-weight:700;
     letter-spacing:0.18em;
-    color:var(--ice);
-    opacity:0.85;
+    color:#3a5580;
+    opacity:1;
     margin-top:0.3rem;
     text-transform:none;
   }
@@ -153,19 +155,19 @@
     font-size:0.82rem;
     font-weight:700;
     letter-spacing:0.08em;
-    color:#fff;
+    color:#13223e;
     text-decoration:none;
     padding:0.55rem 1.05rem;
-    border:1px solid rgba(184,204,232,0.4);
+    border:1px solid rgba(31,78,150,0.35);
     border-radius:999px;
-    background:rgba(10,14,26,0.55);
+    background:rgba(255,255,255,0.78);
     white-space:nowrap;
     transition:background 0.25s, border-color 0.25s, color 0.25s;
   }
   .nav__menu a:hover,
   .nav__menu a:focus-visible{
-    background:var(--glow);
-    border-color:var(--glow);
+    background:#1f4e96;
+    border-color:#1f4e96;
     color:#fff;
   }
 
