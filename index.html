@@ -524,7 +524,46 @@
     text-align:center;
   }
 
-  /* 事業内容 — 各サービスは見出しだけでは伝わらないので、押すと中身が開く */
+  /* 事業内容 — 2部門を切り替えて見せる */
+  [hidden]{display:none !important}
+
+  .svc-tabs{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:0.6rem;
+    margin-bottom:2.6rem;
+  }
+  .svc-tab{
+    font-family:var(--font-body);
+    font-size:0.92rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    color:var(--ice);
+    background:rgba(10,14,26,0.4);
+    border:1px solid rgba(184,204,232,0.35);
+    border-radius:999px;
+    padding:0.7rem 1.5rem;
+    cursor:pointer;
+    transition:background 0.25s, border-color 0.25s, color 0.25s;
+  }
+  .svc-tab:hover,
+  .svc-tab:focus-visible{border-color:var(--glow);color:#fff}
+  .svc-tab[aria-selected="true"]{
+    background:var(--glow);
+    border-color:var(--glow);
+    color:#fff;
+  }
+  .svc-tab small{
+    display:block;
+    font-size:0.68rem;
+    font-weight:500;
+    letter-spacing:0.1em;
+    opacity:0.8;
+    margin-top:0.15rem;
+  }
+
+  /* 各サービスは見出しだけでは伝わらないので、押すと中身が開く */
   .service-group__head{
     display:flex;
     align-items:baseline;
@@ -563,6 +602,37 @@
     opacity:0.75;
     margin-top:0.35rem;
   }
+
+  /* 工業部門は定款どおりの項目名なので、説明を付けず一覧で見せる */
+  .service-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:1px;
+    background:rgba(74,124,201,0.18);
+    border:1px solid rgba(74,124,201,0.18);
+  }
+  .service-list li{
+    list-style:none;
+    background:var(--deep);
+    padding:1.4rem 1.5rem;
+    font-family:var(--font-body);
+    font-size:0.95rem;
+    font-weight:500;
+    color:var(--white);
+    letter-spacing:0.05em;
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+  }
+  .service-list li::before{
+    content:'';
+    flex:none;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--glow);
+  }
+  .panel--alt .service-list li{background:var(--navy)}
 
   .svc{
     border:1px solid rgba(74,124,201,0.25);
@@ -980,7 +1050,17 @@
   <div class="panel__inner">
     <p class="panel__eyebrow">SERVICE</p>
     <h2 class="panel__heading">事業内容</h2>
-    <div class="service-group">
+    <div class="svc-tabs" role="tablist" aria-label="事業部門">
+      <button class="svc-tab" role="tab" id="tab-clean" aria-controls="panel-clean" aria-selected="true">
+        清掃部門<small>Re：Life Works</small>
+      </button>
+      <button class="svc-tab" role="tab" id="tab-industry" aria-controls="panel-industry" aria-selected="false">
+        工業部門<small>株式会社EARTHIA工業</small>
+      </button>
+    </div>
+
+    <div id="panel-clean" role="tabpanel" aria-labelledby="tab-clean">
+      <div class="service-group">
       <div class="service-group__head">
         <span class="service-group__label">清掃部門</span>
         <h3 class="service-group__name">Re：Life Works<small>飲食店・施設の清掃とメンテナンス</small></h3>
@@ -1015,6 +1095,27 @@
         <summary class="svc__btn">メンテナンス<span class="svc__mark"></span></summary>
         <p class="svc__body">定期的な清掃と点検を継続して承ります。汚れが溜まりきる前に手を入れることで、一回あたりの負担を抑えられます。</p>
       </details>
+    </div>
+    </div>
+
+    <div id="panel-industry" role="tabpanel" aria-labelledby="tab-industry">
+      <div class="service-group">
+        <div class="service-group__head">
+          <span class="service-group__label">工業部門</span>
+          <h3 class="service-group__name">株式会社EARTHIA工業<small>土木・建設・プラント・人材</small></h3>
+        </div>
+        <ul class="service-list">
+          <li>土木一式工事</li>
+          <li>板金工事一式</li>
+          <li>建設工事</li>
+          <li>企画／イベント設営・管理</li>
+          <li>請負及びコンサルティング業</li>
+          <li>一般労働者派遣業</li>
+          <li>プラント設備設計</li>
+          <li>制作／販売及び施工並びに保守</li>
+          <li>前各号に付帯する一切の業務</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -1256,6 +1357,36 @@
     soundBtn.childNodes[2].textContent = soundOn ? ' Sound Off' : ' Sound On';
     document.querySelectorAll('.hero__slide video').forEach(v => v.muted = !soundOn);
   });
+
+  // ─── 事業内容の部門切り替え ───
+  // Both panels are in the markup unhidden, and the second is folded away here
+  // rather than in the HTML: if this script never runs, a visitor still sees
+  // every service instead of half of them.
+  (function () {
+    const tabs = [...document.querySelectorAll('.svc-tab')];
+    if (!tabs.length) return;
+    const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+
+    function select(i) {
+      tabs.forEach((t, k) => {
+        t.setAttribute('aria-selected', k === i ? 'true' : 'false');
+        t.tabIndex = k === i ? 0 : -1;
+        panels[k].hidden = k !== i;
+      });
+    }
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i));
+      // left/right arrows move between tabs, as a tablist is expected to
+      t.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault();
+        const next = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        select(next);
+        tabs[next].focus();
+      });
+    });
+    select(0);
+  })();
 
   // ─── Before/After slider ───
   document.querySelectorAll('.ba-slider').forEach(slider => {
