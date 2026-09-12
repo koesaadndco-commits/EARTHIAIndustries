@@ -524,7 +524,47 @@
     text-align:center;
   }
 
-  /* 事業内容 */
+  /* 事業内容 — 清掃部門と工業部門で仕事の性質が違うので、並べずに分ける */
+  .service-group + .service-group{margin-top:3.5rem}
+  .service-group__head{
+    display:flex;
+    align-items:baseline;
+    gap:0.9rem;
+    flex-wrap:wrap;
+    margin-bottom:1.2rem;
+    padding-bottom:0.9rem;
+    border-bottom:1px solid rgba(74,124,201,0.3);
+  }
+  .service-group__label{
+    font-family:var(--font-body);
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.16em;
+    color:var(--deep);
+    background:var(--glow);
+    border-radius:999px;
+    padding:0.3rem 0.85rem;
+    white-space:nowrap;
+  }
+  .service-group__name{
+    font-family:var(--font-display);
+    font-size:clamp(1.25rem, 3vw, 1.7rem);
+    font-weight:700;
+    letter-spacing:0.06em;
+    color:#fff;
+    margin:0;
+  }
+  .service-group__name small{
+    display:block;
+    font-family:var(--font-body);
+    font-size:0.75rem;
+    font-weight:500;
+    letter-spacing:0.12em;
+    color:var(--ice);
+    opacity:0.7;
+    margin-top:0.3rem;
+  }
+
   .service-list{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
@@ -831,7 +871,7 @@
 
 <!-- ─── BEFORE / AFTER ─── -->
 <section class="ba-section" id="works">
-  <p class="ba-section__eyebrow">RESULTS</p>
+  <p class="ba-section__eyebrow">RESULTS &mdash; RELIFEWORKS</p>
   <h2 class="ba-section__heading">グリストラップ清掃実績</h2>
   <p class="ba-section__sub">飲食店の衛生管理を支える、プロの仕事。</p>
 
@@ -910,18 +950,38 @@
   <div class="panel__inner">
     <p class="panel__eyebrow">SERVICE</p>
     <h2 class="panel__heading">事業内容</h2>
-    <ul class="service-list">
-      <li>飲食店・施設の清掃、メンテナンス</li>
-      <li>土木一式工事</li>
-      <li>板金工事一式</li>
-      <li>建設工事</li>
-      <li>企画／イベント設営・管理</li>
-      <li>請負及びコンサルティング業</li>
-      <li>一般労働者派遣業</li>
-      <li>プラント設備設計</li>
-      <li>制作／販売及び施工並びに保守</li>
-      <li>前各号に付帯する一切の業務</li>
-    </ul>
+    <div class="service-group">
+      <div class="service-group__head">
+        <span class="service-group__label">清掃部門</span>
+        <h3 class="service-group__name">ReLifeWorks<small>飲食店・施設の清掃とメンテナンス</small></h3>
+      </div>
+      <ul class="service-list">
+        <li>空調清掃</li>
+        <li>害虫駆除</li>
+        <li>グリストラップ清掃</li>
+        <li>高圧洗浄</li>
+        <li>エアコン分解洗浄</li>
+        <li>メンテナンス</li>
+      </ul>
+    </div>
+
+    <div class="service-group">
+      <div class="service-group__head">
+        <span class="service-group__label">工業部門</span>
+        <h3 class="service-group__name">株式会社EARTHIA工業<small>土木・建設・プラント・人材</small></h3>
+      </div>
+      <ul class="service-list">
+        <li>土木一式工事</li>
+        <li>板金工事一式</li>
+        <li>建設工事</li>
+        <li>企画／イベント設営・管理</li>
+        <li>請負及びコンサルティング業</li>
+        <li>一般労働者派遣業</li>
+        <li>プラント設備設計</li>
+        <li>制作／販売及び施工並びに保守</li>
+        <li>前各号に付帯する一切の業務</li>
+      </ul>
+    </div>
   </div>
 </section>
 
