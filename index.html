@@ -486,50 +486,50 @@
   <div class="hero__letterbox-bot"></div>
 
   <!-- 1 困りごと 店主 -->
-  <div class="hero__slide">
-    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+  <div class="hero__slide active">
+    <video muted playsinline webkit-playsinline autoplay preload="auto">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041847_b1dceb35-fc85-4e71-9e39-97f636f8cf3c.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 2 出動 チーム登場 -->
   <div class="hero__slide">
-    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline autoplay preload="auto">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_025106_f91209c8-812f-4878-9fcd-e15119e3485b.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 3 窓を拭く手元 -->
   <div class="hero__slide">
-    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline autoplay preload="auto">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_0c5ed526-cf5e-4c3d-9556-c25f44c139ec.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 4 厨房 チームワーク -->
   <div class="hero__slide">
-    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline autoplay preload="auto">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041847_f41d3d03-41d1-4ec3-ab67-a6ec99274b84.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 5 グリストラップ -->
   <div class="hero__slide">
-    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline autoplay preload="auto">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_452d3840-c634-4f30-8f03-ad4e00066f88.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 6 仕上がり -->
   <div class="hero__slide">
-    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline autoplay preload="auto">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_27f5850e-a93f-417f-8639-2d2e1916dd8d.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 7 店主の笑顔 -->
   <div class="hero__slide">
-    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline autoplay preload="auto">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_c6732029-2ddd-40ef-8939-e477a4852609.mp4" type="video/mp4">
     </video>
   </div>
   <!-- 8 チーム集合 ラスト -->
   <div class="hero__slide">
-    <video muted loop playsinline webkit-playsinline autoplay preload="auto">
+    <video muted playsinline webkit-playsinline autoplay preload="auto">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3GLcdnfga8iscyGFlWZ4CLzt62I/hf_20260912_041348_81ffc495-d9a7-4e84-9f73-85d2f5aaa871.mp4" type="video/mp4">
     </video>
   </div>
@@ -664,7 +664,11 @@
   ];
 
   let current = 0;
-  const INTERVAL = 7000;
+  // Scenes are driven by the clips themselves, not a fixed beat: each one plays
+  // to its end and only then hands over. The timer below is a safety net for a
+  // clip that stalls or never loads, so it sits well past any real running time.
+  let watchdog = null;
+  let handingOver = false;
 
   // Show first scene text
   const first = sequence[0];
@@ -713,7 +717,27 @@
   }
   updateBar();
 
+  // Each clip asks for the handover itself when it finishes.
+  slides.forEach((slide, i) => {
+    const vid = slide.querySelector('video');
+    if (!vid) return;
+    vid.addEventListener('ended', () => { if (i === current) transition(); });
+  });
+
+  function armWatchdog() {
+    clearTimeout(watchdog);
+    const vid = slides[current].querySelector('video');
+    const clip = vid && isFinite(vid.duration) && vid.duration > 0 ? vid.duration * 1000 : 8000;
+    watchdog = setTimeout(transition, clip + 4000);
+  }
+  armWatchdog();
+
   function transition() {
+    // 'ended' and the watchdog can both land on the same scene
+    if (handingOver) return;
+    handingOver = true;
+    clearTimeout(watchdog);
+
     // Text out
     tagline.classList.remove('visible');
     tagline.classList.add('exit');
@@ -744,10 +768,11 @@
       void tagline.offsetWidth;
       tagline.classList.add('visible');
       subtitle.classList.add('visible');
+
+      handingOver = false;
+      armWatchdog();
     }, 1200);
   }
-
-  setInterval(transition, INTERVAL);
 
   // Sound toggle — unmutes the Higgsfield hero videos
   const soundBtn = document.getElementById('soundBtn');
