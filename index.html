@@ -77,7 +77,6 @@
     inset:0;
     opacity:0;
     transition:opacity 1.4s ease-in-out;
-    will-change:opacity;
     overflow:hidden;
   }
   .hero__slide::after{
@@ -105,6 +104,12 @@
     /* brightness() scales, so blacks stay black and only mid-tones open up;
        the saturation nudge keeps the lift from washing the blues out */
     filter:brightness(var(--video-lift)) saturate(1.06);
+  }
+  /* A colour filter on a playing video is re-applied to every frame, and on a
+     phone that is the difference between smooth and stuttering. The lift is
+     dropped there; the daylight clips are bright enough without it. */
+  @media (pointer:coarse), (max-width:768px){
+    .hero__slide video{filter:none}
   }
 
   /* Film grain overlay */
@@ -1143,13 +1148,13 @@
   .site-foot__disclaimer strong{font-weight:700;opacity:0.95}
 
   .site-foot__copy{
-    font-family:var(--font-display);
-    font-size:0.6rem;
-    font-weight:300;
-    letter-spacing:0.2em;
+    font-family:var(--font-body);
+    font-size:0.74rem;
+    font-weight:500;
+    letter-spacing:0.1em;
     color:var(--ice);
-    opacity:0.35;
-    margin-top:1.6rem;
+    opacity:0.9;
+    margin-top:1.8rem;
   }
 
   /* ─── 契約実績のグラフ ─── */
@@ -1464,7 +1469,7 @@
   .daylight .btn-ghost{background:rgba(255,255,255,0.85)}
   /* The credit again at the foot of the page. .koesa-sig is pinned inside the
      hero; here it flows, on its own line at the right, in bronze for white. */
-  .site-foot__sig{text-align:right;margin-top:1.4rem}
+  .site-foot__sig{text-align:right;margin-top:1.1rem}
   .koesa-sig--foot{position:static;display:inline-flex;opacity:0.7}
   .koesa-sig--foot .koesa-sig__mark{box-shadow:0 0 0 1px rgba(154,120,40,0.45), 0 2px 10px rgba(19,34,62,0.18)}
   .koesa-sig--foot:hover .koesa-sig__mark{box-shadow:0 0 0 2px #9a7828, 0 4px 16px rgba(19,34,62,0.26)}
@@ -1681,8 +1686,8 @@
           <tr><th scope="col">月</th><th scope="col">新規ご契約</th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">1ヶ月目</th><td>22</td></tr>
-          <tr><th scope="row">2ヶ月目</th><td>28</td></tr>
+          <tr><th scope="row">1ヶ月目</th><td>20</td></tr>
+          <tr><th scope="row">2ヶ月目</th><td>30</td></tr>
         </tbody>
       </table>
       <div class="chart__legend" aria-hidden="true">
@@ -2025,6 +2030,8 @@
     なお、<strong>「実績」の施工前後の写真は、実際の施工事例です。</strong>
   </p>
 
+  <p class="site-foot__copy">&copy; 2026 株式会社EARTHIA工業 &mdash; EARTHIA INDUSTRIES CO., LTD.</p>
+
   <p class="site-foot__sig">
     <a href="https://www.instagram.com/koesa_solutions_studio/" target="_blank" rel="noopener"
        class="koesa-sig koesa-sig--foot" aria-label="Designed by KOESA Co., Ltd. — Instagram を新しいタブで開きます">
@@ -2042,8 +2049,6 @@
       </svg>
     </a>
   </p>
-
-  <p class="site-foot__copy">&copy; EARTHIA INDUSTRIES CO., LTD.</p>
 </footer>
 </div><!-- /.daylight -->
 
