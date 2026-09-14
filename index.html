@@ -2159,7 +2159,11 @@
     }
   }
 
-  function startClip(vid) {
+  // `silent` starts the clip muted whatever the sound toggle says. Used for
+  // the incoming clip of a crossfade: iPhone allows one audible video at a
+  // time, and an unmuted newcomer makes it pause the outgoing clip on the
+  // spot -- cutting off whatever is being said 1.4s before the scene ends.
+  function startClip(vid, silent) {
     if (!vid) return;
     vid.preload = 'auto';
     vid.dataset.warmed = '1';
@@ -2176,7 +2180,7 @@
     } else {
       settle(vid);
     }
-    vid.muted = !soundOn;
+    vid.muted = silent ? true : !soundOn;
     const p = vid.play();
     if (p) p.catch(()=>{});
   }
@@ -2292,7 +2296,7 @@
     // Roll the next clip and dissolve to it straight away, while the outgoing
     // one is still running. Both are moving through the join, so there is no
     // frozen frame between the scenes.
-    startClip(slides[nextIdx].querySelector('video'));
+    startClip(slides[nextIdx].querySelector('video'), true);
     slides[nextIdx].classList.add('active');
     slides[prev].classList.remove('active');
 
@@ -2328,9 +2332,13 @@
     }, 500);
 
     setTimeout(() => {
-      // Only once it has faded out completely is the old clip stopped.
+      // Only once it has faded out completely is the old clip stopped, and
+      // only then does the new one get its sound: with both audible at once an
+      // iPhone silences the old one early and the last words of a scene go.
       const pv = slides[prev].querySelector('video');
       if (pv && prev !== current) pv.pause();
+      const nv = slides[current].querySelector('video');
+      if (nv) nv.muted = !soundOn;
       handingOver = false;
       armWatchdog();
     }, CROSSFADE);
