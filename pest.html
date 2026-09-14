@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>採用情報 | 株式会社EARTHIA工業</title>
-<meta name="description" content="株式会社EARTHIA工業（福井市）の採用情報。清掃部門 Re:Life Works と工業部門で、一緒に働く仲間を募集しています。">
+<title>害虫駆除・防除 定期管理プラン | 株式会社EARTHIA工業 Re:Life Works</title>
+<meta name="description" content="ゴキブリ・ネズミ・ハエ・蚊・ダニなどを徹底防除。福井の株式会社EARTHIA工業 Re:Life Works の定期管理プラン。毎月1回プラン 年間42,000円（税込）／3ヶ月に1回プラン 年間22,000円（税込）。契約期間中の発生は追加料金なしで即日対応。">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
+  /* 共通部分（トークン・ナビ・パネル・ボタン・フッター）は recruit.html と同じ。
+     直すときは両方揃えてください。 */
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
   /* This page has no dark film at the top, so it is the daylight palette all
@@ -160,36 +162,6 @@
     box-shadow:none;
   }
 
-  /* ─── Page head ─── */
-  .rhead{
-    padding:9rem 2rem 4rem;
-    text-align:center;
-  }
-  .rhead__eyebrow{
-    font-family:var(--font-display);
-    font-size:0.72rem;
-    font-weight:600;
-    letter-spacing:0.35em;
-    color:var(--glow);
-    margin-bottom:1.1rem;
-  }
-  .rhead__title{
-    font-size:clamp(1.9rem, 6vw, 3rem);
-    font-weight:900;
-    color:var(--pale);
-    letter-spacing:0.06em;
-    line-height:1.4;
-    text-shadow:0 1px 12px rgba(255,255,255,0.85);
-  }
-  .rhead__lead{
-    font-size:clamp(0.95rem, 2.8vw, 1.15rem);
-    font-weight:700;
-    color:var(--pale);
-    line-height:2;
-    margin-top:1.4rem;
-    text-shadow:0 1px 12px rgba(255,255,255,0.85);
-  }
-
   /* ─── Panels (same rhythm as the front page) ─── */
   .panel{padding:5rem 2rem;background:rgba(255,255,255,0.82)}
   .panel--alt{background:rgba(255,255,255,0.9)}
@@ -221,225 +193,6 @@
     margin:0 auto;
   }
 
-  /* ─── なぜ募集するのか ─── */
-  .why{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:1rem;
-    margin-top:2.4rem;
-  }
-  .why__card{
-    padding:1.8rem 1.4rem;
-    border:1px solid rgba(31,78,150,0.28);
-    border-radius:14px;
-    background:rgba(255,255,255,0.9);
-  }
-  .why__num{
-    font-family:var(--font-display);
-    font-size:2.6rem;
-    font-weight:700;
-    line-height:1;
-    color:var(--glow);
-    font-variant-numeric:tabular-nums;
-  }
-  .why__num small{
-    font-family:var(--font-body);
-    font-size:0.32em;
-    font-weight:900;
-    letter-spacing:0.08em;
-    margin-left:0.2em;
-  }
-  .why__label{
-    font-size:0.88rem;
-    font-weight:700;
-    color:var(--pale);
-    line-height:1.9;
-    margin-top:0.7rem;
-  }
-
-  /* ─── 募集職種 ─── */
-  .jobs{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:1.2rem;
-  }
-  .job{
-    padding:2rem 1.6rem;
-    border:1px solid rgba(31,78,150,0.28);
-    border-radius:16px;
-    background:rgba(255,255,255,0.92);
-  }
-  .job__tag{
-    display:inline-block;
-    font-family:var(--font-display);
-    font-size:0.62rem;
-    font-weight:600;
-    letter-spacing:0.22em;
-    color:#fff;
-    background:var(--glow);
-    border-radius:999px;
-    padding:0.35rem 0.9rem;
-    margin-bottom:1rem;
-  }
-  .job__name{
-    font-size:1.2rem;
-    font-weight:900;
-    color:var(--pale);
-    letter-spacing:0.03em;
-    line-height:1.6;
-  }
-  .job__desc{
-    font-size:0.9rem;
-    line-height:2;
-    color:var(--white);
-    margin-top:0.9rem;
-  }
-  .job__list{list-style:none;margin-top:1.2rem;display:grid;gap:0.5rem}
-  .job__list li{
-    position:relative;
-    padding-left:1.3rem;
-    font-size:0.88rem;
-    font-weight:700;
-    color:var(--pale);
-    line-height:1.8;
-  }
-  .job__list li::before{
-    content:'';
-    position:absolute;
-    left:0.1rem; top:0.62em;
-    width:0.5rem; height:0.5rem;
-    border-radius:50%;
-    background:var(--glow);
-  }
-
-  /* ─── 求める人物像 ─── */
-  .wanted{list-style:none;display:grid;gap:0.8rem;max-width:720px;margin:0 auto}
-  .wanted li{
-    padding:1.1rem 1.3rem 1.1rem 3.2rem;
-    position:relative;
-    border:1px solid rgba(31,78,150,0.25);
-    border-radius:12px;
-    background:rgba(255,255,255,0.9);
-    font-size:0.95rem;
-    font-weight:700;
-    color:var(--pale);
-    line-height:1.9;
-  }
-  .wanted li::before{
-    content:'✓';
-    position:absolute;
-    left:1.2rem; top:1.05rem;
-    font-size:1.05rem;
-    font-weight:700;
-    color:var(--glow);
-  }
-
-  /* ─── 募集要項 ─── */
-  .req{width:100%;border-collapse:collapse}
-  .req th,.req td{
-    text-align:left;
-    padding:1rem 0.8rem;
-    border-bottom:1px solid rgba(19,34,62,0.16);
-    font-size:0.92rem;
-    line-height:1.9;
-    vertical-align:top;
-  }
-  .req th{
-    width:11rem;
-    font-weight:900;
-    color:var(--pale);
-    letter-spacing:0.04em;
-    white-space:nowrap;
-  }
-  .req td{color:var(--white);font-weight:500}
-  .req td small{
-    display:block;
-    font-size:0.78rem;
-    color:var(--ice);
-    margin-top:0.3rem;
-    line-height:1.8;
-  }
-  .req__foot{
-    font-size:0.78rem;
-    line-height:1.9;
-    color:var(--ice);
-    margin-top:1.2rem;
-  }
-
-  /* ─── 選考フロー ─── */
-  .flow{
-    list-style:none;
-    counter-reset:step;
-    display:grid;
-    gap:0.9rem;
-    max-width:720px;
-    margin:0 auto;
-  }
-  .flow li{
-    counter-increment:step;
-    position:relative;
-    padding:1.2rem 1.3rem 1.2rem 4rem;
-    border:1px solid rgba(31,78,150,0.25);
-    border-radius:12px;
-    background:rgba(255,255,255,0.9);
-    font-size:0.95rem;
-    font-weight:700;
-    color:var(--pale);
-    line-height:1.9;
-  }
-  .flow li::before{
-    content:counter(step);
-    position:absolute;
-    left:1.1rem; top:1.05rem;
-    width:1.9rem; height:1.9rem;
-    border-radius:50%;
-    background:var(--glow);
-    color:#fff;
-    font-family:var(--font-display);
-    font-size:0.9rem;
-    font-weight:700;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .flow li small{
-    display:block;
-    font-size:0.8rem;
-    font-weight:500;
-    color:var(--ice);
-    margin-top:0.25rem;
-    line-height:1.8;
-  }
-
-  /* ─── エントリー ─── */
-  .entry{
-    max-width:760px;
-    margin:0 auto;
-    text-align:center;
-    padding:2.6rem 1.6rem;
-    border:1px solid rgba(31,78,150,0.3);
-    border-radius:16px;
-    background:rgba(31,78,150,0.07);
-  }
-  .entry__lead{
-    font-size:clamp(1.1rem, 3.4vw, 1.5rem);
-    font-weight:900;
-    line-height:1.8;
-    color:var(--pale);
-  }
-  .entry__sub{
-    font-size:0.88rem;
-    line-height:2;
-    color:var(--white);
-    margin-top:1rem;
-  }
-  .entry__actions{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:0.7rem;
-    margin-top:1.7rem;
-  }
   .btn-solid,.btn-ghost,.btn-line{
     font-size:0.86rem;
     font-weight:700;
@@ -546,41 +299,117 @@
     margin-top:0.15rem;
   }
 
+
+  /* ─── 害虫駆除 定期管理プラン：ページ固有 ─── */
+  .phero{padding:9.5rem 2rem 4rem;text-align:center}
+  .phero__eyebrow{font-family:var(--font-display);font-size:0.72rem;font-weight:600;letter-spacing:0.35em;color:var(--glow);margin-bottom:1rem}
+  .phero__kicker{font-size:clamp(1rem,3vw,1.3rem);font-weight:900;color:var(--pale);letter-spacing:0.08em;margin-bottom:0.5rem;text-shadow:0 1px 12px rgba(255,255,255,0.85)}
+  .phero__title{font-size:clamp(2.2rem,8vw,4rem);font-weight:900;color:var(--pale);letter-spacing:0.04em;line-height:1.25;text-shadow:0 1px 12px rgba(255,255,255,0.85)}
+  .phero__title em{font-style:normal;color:var(--glow)}
+  .phero__lead{font-size:clamp(1.05rem,3.2vw,1.35rem);font-weight:900;color:var(--pale);line-height:1.8;margin-top:1.2rem;text-shadow:0 1px 12px rgba(255,255,255,0.85)}
+  .phero__lead strong{background:linear-gradient(transparent 55%, rgba(240,162,60,0.55) 55%);padding:0 0.1em}
+  .pests{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:0.6rem;margin-top:1.8rem}
+  .pests li{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    width:5.2rem;height:5.2rem;border-radius:50%;
+    border:2px solid rgba(31,78,150,0.45);background:rgba(255,255,255,0.9);
+    font-size:0.86rem;font-weight:900;color:var(--pale);letter-spacing:0.04em;
+  }
+  .pests li small{font-family:var(--font-display);font-size:0.55rem;font-weight:600;letter-spacing:0.2em;color:var(--glow);margin-top:0.15rem}
+  .phero__actions{display:flex;justify-content:center;flex-wrap:wrap;gap:0.7rem;margin-top:2rem}
+  .phero__hours{font-size:0.82rem;font-weight:700;color:var(--ice);margin-top:1rem;line-height:1.9}
+
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;align-items:stretch}
+  .pcard{
+    position:relative;padding:2.2rem 1.8rem 2rem;border-radius:20px;
+    border:1px solid rgba(31,78,150,0.28);background:rgba(255,255,255,0.94);
+    display:flex;flex-direction:column;
+  }
+  .pcard--top{border:2px solid var(--glow);box-shadow:0 12px 40px rgba(31,78,150,0.16)}
+  .pcard__reco{
+    position:absolute;top:-0.9rem;left:1.6rem;
+    font-size:0.72rem;font-weight:900;letter-spacing:0.16em;
+    padding:0.35rem 0.9rem;border-radius:999px;background:#f0a23c;color:#1a1200;
+  }
+  .pcard__name{
+    font-size:clamp(1.3rem,3.6vw,1.6rem);font-weight:900;color:#fff;letter-spacing:0.04em;
+    padding:0.8rem 1.2rem;border-radius:12px;background:var(--glow);text-align:center;margin-bottom:1.4rem;
+  }
+  .pcard--q .pcard__name{background:#1f7a4c}
+  .pcard__term{display:inline-block;font-size:0.74rem;font-weight:700;letter-spacing:0.1em;color:var(--pale);border:1px solid currentColor;border-radius:4px;padding:0.15rem 0.55rem;margin-bottom:0.6rem}
+  .pcard__price{
+    display:flex;align-items:baseline;flex-wrap:wrap;gap:0.3rem;
+    font-family:var(--font-display);font-size:clamp(2.8rem,9vw,4rem);font-weight:700;line-height:1;
+    color:#c8102e;font-variant-numeric:tabular-nums;margin-bottom:1.4rem;
+  }
+  .pcard__yen,.pcard__tax{font-family:var(--font-body);font-weight:700}
+  .pcard__yen{font-size:0.42em}
+  .pcard__tax{font-size:0.3em;color:var(--ice)}
+  .pcard__list{list-style:none;display:grid;gap:0.6rem;margin-top:auto}
+  .pcard__list li{
+    position:relative;padding:0.55rem 0 0.55rem 1.9rem;
+    border-bottom:1px solid rgba(19,34,62,0.12);
+    font-size:0.98rem;font-weight:700;color:var(--pale);line-height:1.6;
+  }
+  .pcard__list li::before{content:'✓';position:absolute;left:0.2rem;top:0.5rem;color:#1f7a4c;font-weight:900;font-size:1.05rem}
+
+  .guarantee{
+    max-width:900px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:1.6rem;align-items:center;
+    padding:1.8rem 2rem;border-radius:20px;
+    border:2px solid rgba(240,162,60,0.7);background:linear-gradient(135deg,#fff8e6,#fff);
+  }
+  .guarantee__seal{
+    width:5.4rem;height:5.4rem;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    border:3px double #c9a227;color:#8a6a22;font-weight:900;font-size:0.95rem;line-height:1.25;letter-spacing:0.08em;text-align:center;
+  }
+  .guarantee__text{font-size:clamp(1rem,2.8vw,1.25rem);font-weight:900;color:var(--pale);line-height:1.9}
+  .guarantee__text em{font-style:normal;color:#c8102e}
+  .guarantee__zero{
+    width:6.2rem;height:6.2rem;border-radius:50%;background:var(--pale);color:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.1;
+  }
+  .guarantee__zero small{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;color:#ffe1a8}
+  .guarantee__zero b{font-family:var(--font-display);font-size:2.4rem;font-weight:700;color:#ffe1a8}
+  .guarantee__zero b i{font-style:normal;font-family:var(--font-body);font-size:0.4em}
+
+  .reasons{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+  .reason{padding:1.8rem 1.5rem;border-radius:16px;border:1px solid rgba(31,78,150,0.28);background:rgba(255,255,255,0.92)}
+  .reason__num{font-family:var(--font-display);font-size:0.72rem;font-weight:700;letter-spacing:0.3em;color:#fff;background:var(--pale);display:inline-block;padding:0.3rem 0.7rem;border-radius:999px;margin-bottom:0.9rem}
+  .reason__title{font-size:1.1rem;font-weight:900;color:var(--pale);line-height:1.6;margin-bottom:0.6rem}
+  .reason__body{font-size:0.9rem;line-height:1.9;color:var(--white)}
+
+  .places{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;max-width:760px;margin:0 auto}
+  .places li{font-size:0.9rem;font-weight:700;color:var(--pale);padding:0.5rem 1rem;border-radius:999px;border:1px solid rgba(31,78,150,0.35);background:rgba(255,255,255,0.85)}
+
+  .grease{
+    max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:1.4rem;align-items:center;
+    padding:1.8rem 2rem;border-radius:20px;border:1px solid rgba(31,78,150,0.28);background:rgba(255,255,255,0.92);
+  }
+  .grease__title{font-size:clamp(1.1rem,3vw,1.4rem);font-weight:900;color:var(--pale);line-height:1.6}
+  .grease__body{font-size:0.9rem;line-height:1.9;color:var(--white);margin-top:0.4rem}
+
+  .entry{max-width:760px;margin:0 auto;text-align:center;padding:2.6rem 1.6rem;border:1px solid rgba(31,78,150,0.3);border-radius:16px;background:rgba(31,78,150,0.07)}
+  .entry__lead{font-size:clamp(1.1rem,3.4vw,1.5rem);font-weight:900;line-height:1.8;color:var(--pale)}
+  .entry__sub{font-size:0.88rem;line-height:2;color:var(--white);margin-top:1rem}
+  .entry__actions{display:flex;justify-content:center;flex-wrap:wrap;gap:0.7rem;margin-top:1.7rem}
+
   @media(max-width:768px){
     .nav{padding:0.75rem 0.8rem;flex-direction:column;align-items:stretch;gap:0.6rem}
     .nav__brand{font-size:1.1rem;text-align:center;letter-spacing:0.12em}
     .nav__brand-text span{font-size:0.6rem;letter-spacing:0.1em;margin-top:0.2rem}
-    .nav__menu{
-      /* `safe center` centres the row while it fits and falls back to
-         flex-start the moment it does not. Plain `center` on an overflowing
-         flex row pushes the first item off the scrollable area entirely --
-         with six entries on a 390px phone, About became unreachable. The
-         flex-start above it is the fallback where `safe` is not understood. */
-      justify-content:flex-start;
-      justify-content:safe center;
-      gap:0.26rem;
-      flex-wrap:nowrap;
-      /* last resort on very narrow phones: slide rather than clip */
-      overflow-x:auto;
-      scrollbar-width:none;
-      -webkit-overflow-scrolling:touch;
-    }
+    .nav__menu{justify-content:flex-start;justify-content:safe center;gap:0.26rem;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
     .nav__menu::-webkit-scrollbar{display:none}
-    .nav__menu a{
-      font-size:0.64rem;
-      padding:0.34rem 0.5rem;
-      letter-spacing:0;
-    }
-    .rhead{padding:10.5rem 1.5rem 3rem}
+    .nav__menu a{font-size:0.64rem;padding:0.34rem 0.5rem;letter-spacing:0}
+    .phero{padding:10.5rem 1.5rem 3rem}
+    .guarantee{grid-template-columns:1fr;text-align:center;justify-items:center;gap:1rem}
+    .grease{grid-template-columns:1fr}
   }
-
   @media(max-width:600px){
     .panel{padding:3.5rem 1.5rem}
-    .req th,.req td{display:block;width:auto;padding:0.55rem 0}
-    .req th{border-bottom:none;padding-bottom:0.15rem}
+    .pests li{width:4.4rem;height:4.4rem;font-size:0.78rem}
+    .pcard{padding:2rem 1.3rem 1.6rem}
     .entry{padding:2rem 1.1rem}
   }
-
   @media(max-width:360px){
     .nav{padding:0.7rem 0.55rem}
     .nav__brand{font-size:1rem}
@@ -603,7 +432,7 @@
     <li><a href="index.html#service">事業内容</a></li>
     <li><a href="index.html#record">実績</a></li>
     <li><a href="index.html#company">会社概要</a></li>
-    <li><a href="recruit.html" aria-current="page">採用情報</a></li>
+    <li><a href="recruit.html">採用情報</a></li>
     <li><a href="index.html#contact">お問い合わせ</a></li>
   </ul>
 </nav>
@@ -612,180 +441,133 @@
 
 <main>
 
-<header class="rhead">
-  <p class="rhead__eyebrow">RECRUIT</p>
-  <h1 class="rhead__title"><span class="clause">綺麗な未来を、</span><span class="clause">一緒に創る仲間へ。</span></h1>
-  <p class="rhead__lead">
-    <span class="clause">株式会社EARTHIA工業では、</span><span class="clause">清掃部門 Re:Life Works と工業部門で、</span><span class="clause">一緒に働く仲間を募集しています。</span>
+<header class="phero">
+  <p class="phero__eyebrow">PEST CONTROL &mdash; Re:Life Works</p>
+  <p class="phero__kicker">衛生害虫駆除・防除</p>
+  <h1 class="phero__title">定期管理<em>プラン</em></h1>
+  <p class="phero__lead">
+    <span class="clause">ゴキブリ・ネズミ・ハエ・蚊・ダニなどを</span><span class="clause"><strong>徹底防除！</strong></span><br>
+    <span class="clause">あらゆる害虫に、</span><span class="clause">プロの対策。</span>
   </p>
+  <ul class="pests" aria-label="対応する害虫">
+    <li>ゴキブリ<small>COCKROACH</small></li>
+    <li>ネズミ<small>MOUSE</small></li>
+    <li>ハエ<small>FLY</small></li>
+    <li>蚊<small>MOSQUITO</small></li>
+    <li>ダニ<small>MITE</small></li>
+  </ul>
+  <div class="phero__actions">
+    <a class="btn-solid" href="tel:09032900005">090-3290-0005</a>
+    <a class="btn-line" href="https://lin.ee/9ytFn1m" target="_blank" rel="noopener">LINEで相談・お見積り</a>
+  </div>
+  <p class="phero__hours">受付 9:00〜18:00（年中無休）／ 現場対応は24時間</p>
 </header>
 
-<!-- ─── なぜ募集するのか ─── -->
-<section class="panel">
+<!-- ─── 2つのプラン ─── -->
+<section class="panel" id="plans">
   <div class="panel__inner">
-    <p class="panel__eyebrow">WHY NOW</p>
-    <h2 class="panel__heading">仕事が、追いつかなくなりました。</h2>
-    <p class="panel__note">
-      <span class="clause">おかげさまで、</span><span class="clause">2ヶ月で県内外の企業様50社以上と</span><span class="clause">ご契約いただきました。</span>
-      <span class="clause">現場は増え続けていて、</span><span class="clause">いまいちばん足りないのは</span><span class="clause">「人」です。</span>
-      <span class="clause">経験の有無より、</span><span class="clause">続けて覚えていける方を</span><span class="clause">お待ちしています。</span>
-    </p>
-
-    <div class="why">
-      <div class="why__card">
-        <p class="why__num">50<small>社以上</small></p>
-        <p class="why__label">2ヶ月でご契約いただいた企業様の数</p>
+    <p class="panel__eyebrow">PLANS</p>
+    <h2 class="panel__heading">選べる2つのプラン</h2>
+    <div class="plans">
+      <div class="pcard pcard--top">
+        <span class="pcard__reco">おすすめ！</span>
+        <p class="pcard__name">毎月1回プラン</p>
+        <span class="pcard__term">年間契約</span>
+        <p class="pcard__price">42,000<span class="pcard__yen">円</span><span class="pcard__tax">（税込）</span></p>
+        <ul class="pcard__list">
+          <li>毎月訪問</li>
+          <li>薬剤散布</li>
+          <li>ベイト剤（毒エサ）設置</li>
+          <li>トラップ（仕掛け）設置</li>
+          <li>定期点検</li>
+        </ul>
       </div>
-      <div class="why__card">
-        <p class="why__num">2<small>部門</small></p>
-        <p class="why__label">清掃部門 Re:Life Works と工業部門</p>
-      </div>
-      <div class="why__card">
-        <p class="why__num">福井<small>拠点</small></p>
-        <p class="why__label">福井市を拠点に、県内外の現場へ</p>
+      <div class="pcard pcard--q">
+        <p class="pcard__name">3ヶ月に1回プラン</p>
+        <span class="pcard__term">年間契約</span>
+        <p class="pcard__price">22,000<span class="pcard__yen">円</span><span class="pcard__tax">（税込）</span></p>
+        <ul class="pcard__list">
+          <li>3ヶ月に1回訪問</li>
+          <li>薬剤散布</li>
+          <li>ベイト剤（毒エサ）設置</li>
+          <li>トラップ（仕掛け）設置</li>
+          <li>定期点検</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── 募集職種 ─── -->
+<!-- ─── 安心保証 ─── -->
+<section class="panel panel--clear">
+  <div class="guarantee">
+    <div class="guarantee__seal">安心<br>保証</div>
+    <p class="guarantee__text">
+      <span class="clause">契約期間中に害虫が発生した場合は、</span><br>
+      <span class="clause"><em>即日対応</em>を基本とし、</span><span class="clause"><em>追加料金</em>は一切いただきません。</span>
+    </p>
+    <div class="guarantee__zero"><small>追加料金</small><b>0<i>円</i></b></div>
+  </div>
+</section>
+
+<!-- ─── 3つの理由 ─── -->
 <section class="panel panel--alt">
   <div class="panel__inner">
-    <p class="panel__eyebrow">POSITIONS</p>
-    <h2 class="panel__heading">募集職種</h2>
-
-    <div class="jobs">
-      <div class="job">
-        <span class="job__tag">CLEANING</span>
-        <p class="job__name">清掃スタッフ<br>（Re:Life Works 部門）</p>
-        <p class="job__desc">
-          <span class="clause">飲食店の厨房から</span><span class="clause">施設の隅々まで、</span><span class="clause">チームで現場に入り、</span><span class="clause">段取りよく仕上げていく仕事です。</span>
-        </p>
-        <ul class="job__list">
-          <li>空調清掃</li>
-          <li>エアコン分解洗浄</li>
-          <li>グリストラップ清掃</li>
-          <li>高圧洗浄</li>
-          <li>害虫駆除</li>
-          <li>各種メンテナンス</li>
-        </ul>
+    <p class="panel__eyebrow">WHY US</p>
+    <h2 class="panel__heading">お客様に選ばれる3つの理由</h2>
+    <div class="reasons">
+      <div class="reason">
+        <span class="reason__num">01</span>
+        <p class="reason__title">定期管理で害虫の発生を未然に防止</p>
+        <p class="reason__body">定期的に管理することで、害虫の侵入や発生を未然に防ぎます。</p>
       </div>
-
-      <div class="job">
-        <span class="job__tag">INDUSTRY</span>
-        <p class="job__name">工業部門スタッフ</p>
-        <p class="job__desc">
-          <span class="clause">土木・建設・プラントの現場で、</span><span class="clause">施工や人材の手配に</span><span class="clause">携わっていただきます。</span>
-        </p>
-        <ul class="job__list">
-          <li>土木</li>
-          <li>建設</li>
-          <li>プラント</li>
-          <li>人材</li>
-        </ul>
+      <div class="reason">
+        <span class="reason__num">02</span>
+        <p class="reason__title">薬剤散布＋ベイト剤＋トラップで徹底対策</p>
+        <p class="reason__body">複数の対策を組み合わせ、害虫を徹底的に防除します。</p>
+      </div>
+      <div class="reason">
+        <span class="reason__num">03</span>
+        <p class="reason__title">追加料金なしの安心サポート</p>
+        <p class="reason__body">発生時の対応も追加料金は一切なし。安心してお任せいただけます。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── 求める人物像 ─── -->
+<!-- ─── 対応施設 ─── -->
 <section class="panel">
   <div class="panel__inner">
-    <p class="panel__eyebrow">WHO WE WANT</p>
-    <h2 class="panel__heading">こんな方をお待ちしています</h2>
-    <ul class="wanted">
-      <li><span class="clause">未経験からでも、</span><span class="clause">ひとつずつ覚えていきたい方</span></li>
-      <li><span class="clause">仕上がりに納得がいくまで、</span><span class="clause">手を抜かずにやりきれる方</span></li>
-      <li><span class="clause">チームで動くことを</span><span class="clause">面倒だと思わない方</span></li>
-      <li><span class="clause">お客様の前で、</span><span class="clause">きちんと挨拶ができる方</span></li>
+    <p class="panel__eyebrow">PLACES</p>
+    <h2 class="panel__heading">対応施設</h2>
+    <ul class="places">
+      <li>飲食店</li><li>事務所</li><li>工場</li><li>病院</li><li>福祉施設</li><li>アパート</li><li>一般住宅</li><li>その他施設</li>
     </ul>
   </div>
 </section>
 
-<!-- ─── 募集要項 ─── -->
-<section class="panel panel--alt">
-  <div class="panel__inner">
-    <p class="panel__eyebrow">REQUIREMENTS</p>
-    <h2 class="panel__heading">募集要項</h2>
-    <table class="req">
-      <tbody>
-        <tr>
-          <th>募集職種</th>
-          <td>清掃スタッフ（Re:Life Works 部門）／工業部門スタッフ</td>
-        </tr>
-        <tr>
-          <th>仕事内容</th>
-          <td>
-            空調清掃、エアコン分解洗浄、グリストラップ清掃、高圧洗浄、害虫駆除、各種メンテナンス／土木・建設・プラント・人材
-            <small>ご経験やご希望をうかがったうえで、担当する現場を決めていきます。</small>
-          </td>
-        </tr>
-        <tr>
-          <th>勤務地</th>
-          <td>
-            〒918-8203　福井県福井市上北野1-18-17 1F右扉（本社）
-            <small>福井県内および近県の各現場へ、本社から向かいます。</small>
-          </td>
-        </tr>
-        <!-- 条件が固まったら、この1行を下の6行に置き換えてください。
-             職業安定法上、募集にあたっては 業務内容・契約期間・就業場所・
-             労働時間・賃金・社会保険の加入状況 の明示が求められます。
-          <tr><th>雇用形態</th><td>正社員／パート・アルバイト</td></tr>
-          <tr><th>契約期間</th><td>期間の定めなし</td></tr>
-          <tr><th>給与</th><td>月給 ○○円 〜 ○○円（経験・能力を考慮）</td></tr>
-          <tr><th>勤務時間</th><td>8:00 〜 17:00（休憩60分）</td></tr>
-          <tr><th>休日・休暇</th><td>週休2日制、年末年始、夏季休暇</td></tr>
-          <tr><th>待遇・福利厚生</th><td>各種社会保険完備、交通費支給</td></tr>
-        -->
-        <tr>
-          <th>勤務条件</th>
-          <td>
-            雇用形態・契約期間・給与・勤務時間・休日・待遇
-            <small>ご経験とご希望をうかがったうえで決定します。具体的な条件は面談時に書面でご説明します。</small>
-          </td>
-        </tr>
-        <tr>
-          <th>応募資格</th>
-          <td>
-            経験不問
-            <small>資格や免許の要否は、ご希望の職種にあわせてご案内します。まずはお気軽にお問い合わせください。</small>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <p class="req__foot">
-      <span class="clause">※ 勤務条件の詳細は、</span><span class="clause">面談時に労働条件通知書にて</span><span class="clause">明示いたします。</span>
-    </p>
+<!-- ─── グリストラップ ─── -->
+<section class="panel panel--clear">
+  <div class="grease">
+    <div>
+      <p class="grease__title"><span class="clause">グリストラップ清掃も</span><span class="clause">おまかせください！</span></p>
+      <p class="grease__body">油汚れ・悪臭の原因を徹底洗浄。清潔な状態を保つことで、悪臭や害虫の発生を防ぎ、衛生的な環境を維持します。施工前後の写真をトップページでご覧いただけます。</p>
+    </div>
+    <a class="btn-ghost" href="index.html#works">施工前後を見る &rarr;</a>
   </div>
 </section>
 
-<!-- ─── 選考フロー ─── -->
-<section class="panel">
-  <div class="panel__inner">
-    <p class="panel__eyebrow">PROCESS</p>
-    <h2 class="panel__heading">応募から入社まで</h2>
-    <ol class="flow">
-      <li>お問い合わせ<small>お電話・LINEのどちらでも受け付けています。</small></li>
-      <li>面談<small>仕事の内容と条件をご説明し、ご希望をうかがいます。</small></li>
-      <li>ご連絡<small>面談の結果を、あらためてご連絡します。</small></li>
-      <li>入社<small>入社日を相談のうえ決定します。</small></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ─── エントリー ─── -->
+<!-- ─── お問い合わせ ─── -->
 <section class="panel panel--clear">
   <div class="entry">
-    <p class="entry__lead">
-      <span class="clause">まずは、</span><span class="clause">話を聞くだけでも大丈夫です。</span>
-    </p>
+    <p class="entry__lead"><span class="clause">まずはお気軽に</span><span class="clause">お問い合わせください。</span></p>
     <p class="entry__sub">
-      <span class="clause">「採用情報を見た」と</span><span class="clause">お伝えください。</span>
-      <span class="clause">履歴書のご用意は、</span><span class="clause">面談が決まってからで構いません。</span>
+      <span class="clause">お見積りは無料です。</span><span class="clause">現地調査にも対応します。</span><br>
+      <span class="clause">受付 9:00〜18:00（年中無休）</span><span class="clause">／ 現場対応は24時間</span>
     </p>
     <div class="entry__actions">
       <a class="btn-solid" href="tel:09032900005">090-3290-0005</a>
-      <a class="btn-line" href="https://lin.ee/9ytFn1m" target="_blank" rel="noopener">LINEで応募</a>
+      <a class="btn-line" href="https://lin.ee/9ytFn1m" target="_blank" rel="noopener">LINEで相談</a>
     </div>
   </div>
 </section>
